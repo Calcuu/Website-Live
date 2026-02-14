@@ -6,6 +6,7 @@ import Calculator from "@/components/Calculator";
 
 const Home = () => {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handlePlayVideo = () => {
     setIsVideoPlaying(true);
@@ -115,23 +116,84 @@ const Home = () => {
               </Button>
 
               {/* Mobile Menu Button */}
-              <button className="md:hidden p-2 text-calcuu-secondary hover:text-calcuu-primary transition-colors">
+              <button
+                className="md:hidden p-2 text-calcuu-secondary hover:text-calcuu-primary transition-colors"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              >
                 <svg
                   className="w-6 h-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
+                  {isMobileMenuOpen ? (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  ) : (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  )}
                 </svg>
               </button>
             </div>
           </div>
+
+          {/* Mobile Menu Dropdown */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden border-t border-calcuu-detail py-4 space-y-3">
+              <a
+                href="#features"
+                className="block text-calcuu-secondary hover:text-calcuu-primary transition-colors font-medium px-2 py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Functies
+              </a>
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  scrollToVideoAndPlay();
+                }}
+                className="block w-full text-left text-calcuu-secondary hover:text-calcuu-primary transition-colors font-medium px-2 py-2 bg-transparent border-none cursor-pointer"
+              >
+                Demo
+              </button>
+              <a
+                href="#pricing"
+                className="block text-calcuu-secondary hover:text-calcuu-primary transition-colors font-medium px-2 py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Prijzen
+              </a>
+              <a
+                href="#download"
+                className="block text-calcuu-secondary hover:text-calcuu-primary transition-colors font-medium px-2 py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Download
+              </a>
+              <Button
+                size="sm"
+                className="w-full bg-calcuu-primary hover:bg-calcuu-primary/90 text-white font-semibold px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 h-12"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  const downloadSection = document.getElementById("download");
+                  if (downloadSection) {
+                    downloadSection.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+              >
+                Probeer Gratis
+              </Button>
+            </div>
+          )}
         </div>
       </nav>
 
@@ -349,7 +411,7 @@ const Home = () => {
                 <div className="flex gap-5 max-md:flex-col max-md:gap-0">
                   <div className="flex flex-col w-1/2 max-md:ml-0 max-md:w-full">
                     <h3 className="text-xl font-semibold text-calcuu-secondary mb-4">
-                      <p data-pm-slice="1 1 []">Urenregistratie</p>
+                      Urenregistratie
                     </h3>
                     <p className="text-calcuu-text-sub leading-relaxed">
                       Houd alles overzichtelijk zoals je uren per project, foto
@@ -519,7 +581,7 @@ const Home = () => {
                   Calcuu app&nbsp;
                 </span>
                 <br />
-                om het offerte proces te versnellen en te vereenvoudigen..
+                om het offerte proces te versnellen en te vereenvoudigen.
               </p>
             </div>
 
@@ -1145,7 +1207,7 @@ const Home = () => {
           </div>
 
           <div className="border-t border-gray-600 mt-8 pt-8 text-center text-sm text-gray-300">
-            © 2024 Calcuu by Zinger Company. Alle rechten voorbehouden.
+            © 2026 Calcuu by Zinger Company. Alle rechten voorbehouden.
           </div>
         </div>
       </footer>
