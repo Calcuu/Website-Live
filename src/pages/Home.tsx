@@ -1,8 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Play, Download, Mail, Phone } from "lucide-react";
 import Calculator from "@/components/Calculator";
+import CookieBanner from "@/components/CookieBanner";
+import ScrollFadeIn from "@/components/ScrollFadeIn";
+
+const FaqItem = ({ question, answer }: { question: string; answer: string }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className="border-b border-calcuu-detail">
+      <button
+        className="w-full flex items-center justify-between py-5 text-left bg-transparent border-none cursor-pointer"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span className="text-lg font-semibold text-calcuu-secondary pr-4">{question}</span>
+        <svg
+          className={`w-5 h-5 text-calcuu-primary flex-shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-96 opacity-100 pb-5" : "max-h-0 opacity-0"}`}>
+        <p className="text-calcuu-text-sub leading-relaxed">{answer}</p>
+      </div>
+    </div>
+  );
+};
 
 const Home = () => {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -147,8 +174,10 @@ const Home = () => {
           </div>
 
           {/* Mobile Menu Dropdown */}
-          {isMobileMenuOpen && (
-            <div className="md:hidden border-t border-calcuu-detail py-4 space-y-3">
+          <div
+            className={`md:hidden border-t border-calcuu-detail overflow-hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? "max-h-96 opacity-100 py-4" : "max-h-0 opacity-0 py-0"}`}
+          >
+            <div className="space-y-3">
               <a
                 href="#features"
                 className="block text-calcuu-secondary hover:text-calcuu-primary transition-colors font-medium px-2 py-2"
@@ -193,7 +222,7 @@ const Home = () => {
                 Probeer Gratis
               </Button>
             </div>
-          )}
+          </div>
         </div>
       </nav>
 
@@ -248,7 +277,7 @@ const Home = () => {
                 <img
                   src="https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/calcuu-offerte-a085b6?format=webp&width=800"
                   alt="Calcuu app offerte voorbeeld op iPhone"
-                  className="h-[600px] w-auto object-contain shadow-2xl"
+                  className="h-[400px] lg:h-[600px] w-auto object-contain shadow-2xl"
                   style={{
                     background: "transparent",
                     padding: "0",
@@ -362,6 +391,7 @@ const Home = () => {
       {/* Features Section */}
       <section id="features" className="py-16 lg:py-24 bg-calcuu-white">
         <div className="container mx-auto px-4">
+          <ScrollFadeIn>
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-calcuu-primary mb-6 tracking-tight">
               Bereken en verstuur de offerte direct op locatie.
@@ -372,7 +402,9 @@ const Home = () => {
               buitenwerk in minuten, geen uren.
             </p>
           </div>
+          </ScrollFadeIn>
 
+          <ScrollFadeIn>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {/* Left Side - 50% width - 1 block */}
             <div className="lg:col-span-1">
@@ -416,7 +448,7 @@ const Home = () => {
                     <p className="text-calcuu-text-sub leading-relaxed">
                       Houd alles overzichtelijk zoals je uren per project, foto
                       documentatie, klantbeheer, materiaalbeheer en dat allemaal
-                      in ��én app.
+                      in één app.
                     </p>
                   </div>
                   <div className="flex flex-col ml-5 w-1/2 max-md:ml-0 max-md:w-full">
@@ -453,11 +485,13 @@ const Home = () => {
               </div>
             </div>
           </div>
+          </ScrollFadeIn>
         </div>
       </section>
 
       {/* Demo Video Section */}
       <section id="demo" className="py-16 lg:py-24 bg-calcuu-background">
+        <ScrollFadeIn>
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-semibold text-calcuu-secondary mb-4">
             Zie Calcuu in actie
@@ -499,6 +533,7 @@ const Home = () => {
             </div>
           </div>
         </div>
+        </ScrollFadeIn>
       </section>
 
       {/* Target Audience Section */}
@@ -889,7 +924,7 @@ const Home = () => {
           {/* Pricing Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Starter Plan */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-calcuu-detail h-[600px] flex flex-col">
+            <div className="bg-white rounded-2xl p-8 shadow-lg border border-calcuu-detail h-auto md:h-[600px] flex flex-col">
               <h3 className="text-2xl font-bold text-calcuu-secondary mb-2">
                 Starter
               </h3>
@@ -954,7 +989,7 @@ const Home = () => {
 
             {/* Professional Plan */}
             <div
-              className="rounded-2xl p-8 shadow-lg border-2 border-calcuu-primary relative h-[600px] flex flex-col"
+              className="rounded-2xl p-8 shadow-lg border-2 border-calcuu-primary relative h-auto md:h-[600px] flex flex-col"
               style={{ backgroundColor: "#f8f6fc" }}
             >
               <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-calcuu-primary text-white px-4 py-1 rounded-full text-sm font-semibold">
@@ -1021,7 +1056,7 @@ const Home = () => {
             </div>
 
             {/* Enterprise Plan */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-calcuu-detail h-[600px] flex flex-col">
+            <div className="bg-white rounded-2xl p-8 shadow-lg border border-calcuu-detail h-auto md:h-[600px] flex flex-col">
               <h3 className="text-2xl font-bold text-calcuu-secondary mb-2">
                 Enterprise
               </h3>
@@ -1039,10 +1074,102 @@ const Home = () => {
                 size="lg"
                 variant="outline"
                 className="w-full border-2 border-calcuu-secondary text-calcuu-secondary hover:bg-calcuu-secondary hover:text-white font-semibold py-3 rounded-lg transition-all duration-300 mb-6"
+                onClick={() => window.location.href = "mailto:info@calcuu.nl?subject=Enterprise%20aanvraag"}
               >
                 Contact Ons
               </Button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-16 lg:py-24 bg-calcuu-background">
+        <ScrollFadeIn>
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-semibold text-calcuu-secondary text-center mb-4">
+            Wat schilders zeggen over Calcuu
+          </h2>
+          <p className="text-lg text-calcuu-text-sub text-center mb-12 max-w-2xl mx-auto">
+            Ontdek waarom vakschilders overstappen naar Calcuu.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              {
+                name: "Mark de Vries",
+                role: "Vakschilder, ZZP",
+                quote: "Voorheen zat ik elke avond uren achter de laptop om offertes te maken. Met Calcuu doe ik het nu ter plekke bij de klant. Scheelt mij zeker 5 uur per week.",
+                stars: 5,
+              },
+              {
+                name: "Peter Jansen",
+                role: "Eigenaar Schildersbedrijf",
+                quote: "De automatische materiaalberekening is een gamechanger. Geen gedoe meer met Excel-sheets. Mijn offertes zien er ook veel professioneler uit.",
+                stars: 5,
+              },
+              {
+                name: "Dennis Bakker",
+                role: "Vakschilder, 15 jaar ervaring",
+                quote: "Eindelijk een app die begrijpt wat een schilder nodig heeft. Simpel, snel en precies. Mijn klanten zijn onder de indruk van de snelle offertes.",
+                stars: 5,
+              },
+            ].map((review, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-all duration-300"
+              >
+                <div className="flex gap-1 mb-4">
+                  {Array.from({ length: review.stars }).map((_, i) => (
+                    <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-calcuu-text-sub leading-relaxed mb-6 italic">
+                  "{review.quote}"
+                </p>
+                <div>
+                  <p className="font-semibold text-calcuu-secondary">{review.name}</p>
+                  <p className="text-sm text-calcuu-text-sub">{review.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        </ScrollFadeIn>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq" className="py-16 lg:py-24 bg-calcuu-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-semibold text-calcuu-secondary text-center mb-12">
+              Veelgestelde Vragen
+            </h2>
+            <FaqItem
+              question="Is Calcuu echt gratis te proberen?"
+              answer="Ja! Je kunt Calcuu 14 dagen gratis uitproberen zonder verplichtingen. Je hoeft geen creditcard in te vullen. Na de proefperiode kies je zelf of je doorgaat."
+            />
+            <FaqItem
+              question="Werkt Calcuu op zowel iPhone als Android?"
+              answer="Ja, Calcuu is beschikbaar in zowel de Apple App Store als de Google Play Store. De app werkt op alle moderne smartphones en tablets."
+            />
+            <FaqItem
+              question="Hoe nauwkeurig zijn de berekeningen?"
+              answer="Calcuu berekent materiaal en uren op basis van bewezen formules voor de schildersbranche. Je kunt altijd handmatig aanpassen als dat nodig is voor specifieke situaties."
+            />
+            <FaqItem
+              question="Kan ik mijn eigen prijzen en tarieven instellen?"
+              answer="Absoluut! Je stelt je eigen uurtarieven, materiaalkosten en marges in. Zo past elke offerte bij jouw bedrijf en prijsniveau."
+            />
+            <FaqItem
+              question="Hoe verstuur ik een offerte naar mijn klant?"
+              answer="Na het berekenen genereer je met één klik een professionele PDF-offerte. Deze verstuur je direct via e-mail vanuit de app, of je print hem ter plekke uit."
+            />
+            <FaqItem
+              question="Kan ik Calcuu opzeggen wanneer ik wil?"
+              answer="Ja, je kunt je abonnement op elk moment opzeggen. Er zijn geen langlopende contracten of verborgen kosten."
+            />
           </div>
         </div>
       </section>
@@ -1054,10 +1181,6 @@ const Home = () => {
             <h2 className="text-3xl md:text-4xl font-semibold text-calcuu-secondary mb-4 flex flex-col justify-center items-center">
               <span className="text-5xl bg-gray-50">Download Calcuu</span>
             </h2>
-
-            <p className="text-xl font-semibold text-calcuu-secondary mb-16">
-              <h4 className="text-gray-400 font-semibold"></h4>
-            </p>
 
             <div className="relative flex flex-col sm:flex-row gap-4 justify-center items-center">
               {/* Arrow pointing to App Store */}
@@ -1179,12 +1302,12 @@ const Home = () => {
                   </a>
                 </div>
                 <div>
-                  <a href="#" className="hover:text-white transition-colors">
+                  <a href="/privacy" className="hover:text-white transition-colors">
                     Voorwaarden
                   </a>
                 </div>
                 <div>
-                  <a href="#" className="hover:text-white transition-colors">
+                  <a href="mailto:support@calcuu.nl" className="hover:text-white transition-colors">
                     Support
                   </a>
                 </div>
@@ -1194,14 +1317,14 @@ const Home = () => {
             <div>
               <h4 className="font-semibold mb-4">Download</h4>
               <div className="space-y-2">
-                <div className="flex items-center gap-2 text-xs bg-white text-black px-3 py-2 rounded-lg">
+                <a href="https://apps.apple.com/nl/app/calcuu/id1609226426" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs bg-white text-black px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
                   <Download className="w-4 h-4" />
                   <span>App Store</span>
-                </div>
-                <div className="flex items-center gap-2 text-xs bg-white text-black px-3 py-2 rounded-lg">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.calcuu.calcuu" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs bg-white text-black px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
                   <Download className="w-4 h-4" />
                   <span>Google Play</span>
-                </div>
+                </a>
               </div>
             </div>
           </div>
@@ -1211,6 +1334,8 @@ const Home = () => {
           </div>
         </div>
       </footer>
+
+      <CookieBanner />
     </div>
   );
 };
