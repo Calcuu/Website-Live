@@ -4,8 +4,28 @@ import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Play, Download, Mail, Phone } from "lucide-react";
 import Calculator from "@/components/Calculator";
 
+const APP_STORE_URL = "https://apps.apple.com/nl/app/calcuu/id1609226426";
+const PLAY_STORE_URL =
+  "https://play.google.com/store/apps/details?id=com.calcuu.calcuu";
+
+const detectPlatform = (): "ios" | "android" | "desktop" => {
+  if (typeof window === "undefined") return "desktop";
+  // Test-override via ?platform=ios|android|desktop
+  const override = new URLSearchParams(window.location.search).get("platform");
+  if (override === "ios" || override === "android" || override === "desktop") {
+    return override;
+  }
+  const ua = navigator.userAgent;
+  if (/iPhone|iPad|iPod/.test(ua)) return "ios";
+  if (/Android/.test(ua)) return "android";
+  return "desktop";
+};
+
 const Home = () => {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [platform] = useState<"ios" | "android" | "desktop">(() =>
+    detectPlatform(),
+  );
 
   const handlePlayVideo = () => {
     setIsVideoPlaying(true);
@@ -753,237 +773,132 @@ const Home = () => {
       </section>
       <Calculator />
 
-      {/* Pricing Section */}
-      <section id="pricing" className="py-16 lg:py-24 bg-gray-50">
-        <div className="container mx-auto px-4">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-calcuu-secondary mb-4">
-              Transparant. Simpel.
-              <br />
-              Upgrade Wanneer jij wilt.
-            </h2>
-            <p className="text-lg text-calcuu-text-sub mb-8 max-w-2xl mx-auto">
-              Nu tijdelijk
-              <span className="text-calcuu-primary font-bold">
-                &nbsp;Mega Korting
-              </span>
-              &nbsp;op een jaarlijks abonnement
-              <br />
-              Begin <strong>gratis</strong>&nbsp;en maak je keuze later.
-            </p>
+      {/* Pricing Section — Founder Member offer */}
+      {(() => {
+        const FOUNDER_COUNT = 4;
+        const FOUNDER_TOTAL = 75;
+        const FOUNDER_PRICE = 15;
+        const FOUNDER_YEARLY = FOUNDER_PRICE * 12;
+        const REGULAR_PRICE = 47;
+        const remaining = FOUNDER_TOTAL - FOUNDER_COUNT;
+        const progressPercent = Math.round(
+          (FOUNDER_COUNT / FOUNDER_TOTAL) * 100,
+        );
 
-            {/* Billing Toggle */}
-            <div className="flex items-center justify-center gap-4 mb-12">
-              <span className="text-calcuu-secondary">Maandelijks</span>
-              <div className="relative">
-                <input
-                  type="checkbox"
-                  id="billing-toggle"
-                  className="sr-only"
-                  defaultChecked
-                  onChange={(e) => {
-                    const isAnnual = e.target.checked;
-                    const monthlyPrices =
-                      document.querySelectorAll(".monthly-price");
-                    const yearlyPrices =
-                      document.querySelectorAll(".yearly-price");
-                    const toggle = document.querySelector(
-                      "#billing-toggle + label > div",
-                    );
-                    const yearlyBadge = document.querySelector(".yearly-badge");
-
-                    if (isAnnual) {
-                      monthlyPrices.forEach((p) => p.classList.add("hidden"));
-                      yearlyPrices.forEach((p) => p.classList.remove("hidden"));
-                      toggle.style.transform = "translateX(24px)";
-                      toggle.parentElement.style.backgroundColor = "#5B29DE";
-                      yearlyBadge.classList.remove("hidden");
-                    } else {
-                      monthlyPrices.forEach((p) =>
-                        p.classList.remove("hidden"),
-                      );
-                      yearlyPrices.forEach((p) => p.classList.add("hidden"));
-                      toggle.style.transform = "translateX(0px)";
-                      toggle.parentElement.style.backgroundColor = "#e5e7eb";
-                      yearlyBadge.classList.add("hidden");
-                    }
-                  }}
-                />
-                <label
-                  htmlFor="billing-toggle"
-                  className="flex items-center cursor-pointer bg-calcuu-primary w-12 h-6 rounded-full p-1 transition-all duration-300"
-                >
-                  <div className="bg-white w-4 h-4 rounded-full shadow-sm transform translate-x-6 transition-transform duration-300"></div>
-                </label>
-              </div>
-              <span className="text-calcuu-secondary">Jaarlijks</span>
-              <span className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-semibold animate-pulse yearly-badge">
-                BESPAAR 36%
-              </span>
-            </div>
-          </div>
-
-          {/* Pricing Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Starter Plan */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-calcuu-detail h-[600px] flex flex-col">
-              <h3 className="text-2xl font-bold text-calcuu-secondary mb-2">
-                Starter
-              </h3>
-              <div className="mb-6">
-                <div className="monthly-price hidden">
-                  <span className="text-4xl font-bold text-calcuu-secondary">
-                    €0
-                  </span>
-                  <span className="text-calcuu-text-sub ml-2">
-                    14 dagen gratis
-                  </span>
-                </div>
-                <div className="yearly-price">
-                  <span className="text-4xl font-bold text-calcuu-secondary">
-                    €0
-                  </span>
-                  <span className="text-calcuu-text-sub ml-2">
-                    14 dagen gratis
-                  </span>
-                </div>
-              </div>
-              <p className="text-calcuu-text-sub mb-6">
-                Ideaal voor schilders die snel, eenvoudige en professionele
-                offertes willen maken.
-              </p>
-
-              <Button
-                size="lg"
-                variant="outline"
-                className="w-full border-2 border-calcuu-primary text-calcuu-primary hover:bg-calcuu-primary hover:text-white font-semibold py-3 rounded-lg transition-all duration-300 mb-6"
-                onClick={() => {
-                  const downloadSection = document.getElementById("download");
-                  if (downloadSection) {
-                    downloadSection.scrollIntoView({ behavior: "smooth" });
-                  }
-                }}
-              >
-                Probeer Gratis
-              </Button>
-
-              <div className="space-y-4 flex-grow">
-                <p className="font-semibold text-calcuu-secondary">
-                  Starter functies:
+        return (
+          <section id="pricing" className="py-16 lg:py-24 bg-gray-50">
+            <div className="container mx-auto px-4">
+              {/* Header */}
+              <div className="text-center mb-12">
+                <h2 className="text-4xl md:text-5xl font-bold text-calcuu-secondary mb-4">
+                  Word Founder Member.
+                </h2>
+                <p className="text-lg text-calcuu-text-sub max-w-2xl mx-auto">
+                  Voor de eerste {FOUNDER_TOTAL} schilders die meebouwen aan
+                  Calcuu.
                 </p>
-                <div className="space-y-3 text-sm">
-                  {[
-                    "Onbeperkte projecten",
-                    "Calculatie voor binnen- en buitenwerk",
-                    "Professionele offertes met logo",
-                    "Email ondersteuning",
-                    "Basis materiaal database",
-                    "14 dagen toegang",
-                  ].map((feature, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <CheckCircle className="w-4 h-4 text-calcuu-primary" />
-                      <span className="text-calcuu-text-sub">{feature}</span>
-                    </div>
-                  ))}
-                </div>
               </div>
-            </div>
 
-            {/* Professional Plan */}
-            <div
-              className="rounded-2xl p-8 shadow-lg border-2 border-calcuu-primary relative h-[600px] flex flex-col"
-              style={{ backgroundColor: "#f8f6fc" }}
-            >
-              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-calcuu-primary text-white px-4 py-1 rounded-full text-sm font-semibold">
-                Meest Populair
-              </div>
-              <h3 className="text-2xl font-bold text-calcuu-primary mb-2">
-                Professional
-              </h3>
-              <div className="mb-6">
-                <div className="monthly-price hidden">
-                  <span className="text-4xl font-bold text-calcuu-secondary">
-                    €60
-                  </span>
-                  <span className="text-calcuu-text-sub ml-2">per maand</span>
-                </div>
-                <div className="yearly-price">
-                  <span className="text-4xl font-bold text-calcuu-secondary">
-                    €45
-                  </span>
-                  <span className="text-calcuu-text-sub ml-2">per maand</span>
-                  <div className="text-sm text-green-500 font-semibold">
-                    36% KORTING!
+              {/* Eén gecentreerde kaart */}
+              <div className="max-w-xl mx-auto">
+                <div className="bg-white rounded-2xl shadow-xl border-2 border-calcuu-primary p-6 md:p-8 relative">
+                  {/* Founder badge */}
+                  <div className="flex justify-center mb-6">
+                    <span className="inline-flex items-center gap-2 bg-calcuu-primary text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase">
+                      🔨 Founder Member
+                    </span>
                   </div>
-                </div>
-              </div>
-              <p className="text-calcuu-text-sub mb-6">
-                Voor ervaren schilders die hun bedrijf willen laten groeien
-              </p>
 
-              <Button
-                size="lg"
-                className="w-full bg-calcuu-primary hover:bg-calcuu-primary/90 text-white font-semibold py-3 rounded-lg transition-all duration-300 mb-6"
-                onClick={() => {
-                  const downloadSection = document.getElementById("download");
-                  if (downloadSection) {
-                    downloadSection.scrollIntoView({ behavior: "smooth" });
-                  }
-                }}
-              >
-                Start Nu
-              </Button>
-
-              <div className="space-y-4 flex-grow">
-                <p className="font-semibold text-calcuu-secondary">
-                  Alles van "Starter", plus:
-                </p>
-                <div className="space-y-3 text-sm">
-                  {[
-                    "Onbeperkte projecten",
-                    "Calculatie voor binnen- en buitenwerk",
-                    "Professionele offertes met logo",
-                    "Email ondersteuning",
-                    "Basis materiaal database",
-                    "Meerwerk: uren en notities",
-                    "Projectfoto's",
-                  ].map((feature, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <CheckCircle className="w-4 h-4 text-calcuu-primary" />
-                      <span className="text-calcuu-text-sub">{feature}</span>
+                  {/* Progress bar + counter */}
+                  <div className="mb-6">
+                    <div className="flex justify-between items-baseline text-sm mb-2">
+                      <span className="text-calcuu-secondary font-semibold">
+                        {FOUNDER_COUNT} / {FOUNDER_TOTAL} plekken
+                      </span>
+                      <span className="text-calcuu-text-sub text-xs">
+                        Nog {remaining} beschikbaar
+                      </span>
                     </div>
-                  ))}
+                    <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-calcuu-primary transition-all duration-500"
+                        style={{ width: `${progressPercent}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  <hr className="border-gray-200 my-6" />
+
+                  {/* Prijs-blok */}
+                  <div className="text-center mb-2">
+                    <div className="flex items-baseline justify-center gap-1">
+                      <span className="text-6xl font-bold text-calcuu-secondary">
+                        €{FOUNDER_PRICE}
+                      </span>
+                      <span className="text-xl text-calcuu-text-sub">
+                        / maand
+                      </span>
+                    </div>
+                    <p className="text-sm text-calcuu-text-sub mt-2">
+                      Jaarlijks gefactureerd · €{FOUNDER_YEARLY} per jaar
+                    </p>
+                  </div>
+
+                  {/* Price-lock-uitleg */}
+                  <p className="text-center text-sm text-calcuu-text-sub mt-6 px-4 leading-relaxed">
+                    Jouw prijs blijft <strong>€{FOUNDER_PRICE}/maand</strong>{" "}
+                    zolang je gebruiker bent — ook als Calcuu later €
+                    {REGULAR_PRICE}/maand kost.
+                  </p>
+
+                  <hr className="border-gray-200 my-6" />
+
+                  {/* Wat je krijgt */}
+                  <div className="space-y-3 mb-8">
+                    {[
+                      "14 dagen gratis proberen",
+                      "Volledige toegang tot alle functies",
+                      `"Founder Member" status in de app`,
+                      "Direct contact met de oprichter",
+                      "Stem in welke features als eerste komen",
+                      `Lifetime price-lock op €${FOUNDER_PRICE}/maand`,
+                    ].map((feature, index) => (
+                      <div key={index} className="flex items-start gap-3">
+                        <CheckCircle className="w-5 h-5 text-calcuu-primary flex-shrink-0 mt-0.5" />
+                        <span className="text-sm text-calcuu-secondary">
+                          {feature}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* CTA */}
+                  <Button
+                    size="lg"
+                    className="w-full bg-calcuu-primary hover:bg-calcuu-primary/90 text-white font-semibold py-4 rounded-lg transition-all duration-300 text-base"
+                    onClick={() => {
+                      const downloadSection =
+                        document.getElementById("download");
+                      if (downloadSection) {
+                        downloadSection.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }}
+                  >
+                    Word Founder Member
+                  </Button>
                 </div>
+
+                {/* Voetnoot */}
+                <p className="text-xs text-gray-500 text-center mt-4 px-4 leading-relaxed">
+                  Na de eerste {FOUNDER_TOTAL} founders geldt de reguliere prijs
+                  van €{REGULAR_PRICE}/maand. Aanbieding alleen voor nieuwe
+                  gebruikers.
+                </p>
               </div>
             </div>
-
-            {/* Enterprise Plan */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-calcuu-detail h-[600px] flex flex-col">
-              <h3 className="text-2xl font-bold text-calcuu-secondary mb-2">
-                Enterprise
-              </h3>
-              <div className="mb-6">
-                <span className="text-lg text-calcuu-text-sub">
-                  Neem contact op
-                </span>
-              </div>
-              <p className="text-calcuu-text-sub mb-6">
-                Voor grote schildersbedrijven met meerdere teams en complexe
-                behoeften
-              </p>
-
-              <Button
-                size="lg"
-                variant="outline"
-                className="w-full border-2 border-calcuu-secondary text-calcuu-secondary hover:bg-calcuu-secondary hover:text-white font-semibold py-3 rounded-lg transition-all duration-300 mb-6"
-              >
-                Contact Ons
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+          </section>
+        );
+      })()}
 
       {/* App Download Section */}
       <section id="download" className="py-16 lg:py-24">
@@ -997,73 +912,99 @@ const Home = () => {
               <h4 className="text-gray-400 font-semibold"></h4>
             </p>
 
-            <div className="relative flex flex-col sm:flex-row gap-4 justify-center items-center">
-              {/* Arrow pointing to App Store */}
-              <img
-                src="https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/pijl-8c2851?format=webp&width=800"
-                alt="Arrow pointing to App Store"
-                className="absolute -top-20 left-1/2 transform -translate-x-32 w-16 h-16 sm:w-20 sm:h-20"
-              />
-
-              {/* Arrow pointing to Google Play Store (mirrored) */}
-              <img
-                src="https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/pijl-8c2851?format=webp&width=800"
-                alt="Arrow pointing to Google Play Store"
-                className="absolute -top-20 right-1/2 transform translate-x-32 scale-x-[-1] w-16 h-16 sm:w-20 sm:h-20"
-              />
-
-              <div
-                className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors cursor-pointer"
-                onClick={() =>
-                  window.open(
-                    "https://apps.apple.com/nl/app/calcuu/id1609226426",
-                    "_blank",
-                  )
-                }
-              >
-                <Download className="w-6 h-6" />
-                <div className="text-left">
-                  <div className="text-xs">Download on the</div>
-                  <div className="text-lg font-semibold">App Store</div>
-                </div>
+            {/* iOS: alleen App Store-knop */}
+            {platform === "ios" && (
+              <div className="flex justify-center">
+                <button
+                  onClick={() => window.open(APP_STORE_URL, "_blank")}
+                  className="flex items-center justify-center gap-3 bg-black text-white px-8 py-5 rounded-xl hover:bg-gray-800 transition-colors w-full max-w-sm cursor-pointer"
+                >
+                  <Download className="w-7 h-7" />
+                  <div className="text-left">
+                    <div className="text-xs">Download in de</div>
+                    <div className="text-xl font-semibold">App Store</div>
+                  </div>
+                </button>
               </div>
-              <div
-                className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors cursor-pointer"
-                onClick={() =>
-                  window.open(
-                    "https://play.google.com/store/apps/details?id=com.calcuu.calcuu",
-                    "_blank",
-                  )
-                }
-              >
-                <Download className="w-6 h-6" />
-                <div className="text-left">
-                  <div className="text-xs">Get it on</div>
-                  <div className="text-lg font-semibold">Google Play</div>
-                </div>
-              </div>
-            </div>
-          </div>
+            )}
 
-          <div className="flex justify-center">
-            <img
-              src={(() => {
-                const mockups = [
-                  "https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/1.-download-mockup-a252b2?format=webp&width=800",
-                  "https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/2.-download-mockup-9ff884?format=webp&width=800",
-                  "https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/3.-download-mockup-d06f78?format=webp&width=800",
-                  "https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/4.-download-mockup-f4d202?format=webp&width=800",
-                  "https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/5.-download-mockup-7d5392?format=webp&width=800",
-                  "https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/6.-download-mockup-cf2992?format=webp&width=800",
-                  "https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/7.-download-mockup-37546e?format=webp&width=800",
-                  "https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/8.-download-mockup-39e04a?format=webp&width=800",
-                ];
-                return mockups[Math.floor(Math.random() * mockups.length)];
-              })()}
-              alt="Professionele schilder gebruikt Calcuu app"
-              className="max-w-full h-auto"
-              style={{ maxHeight: "600px", width: "auto" }}
-            />
+            {/* Android: alleen Google Play-knop */}
+            {platform === "android" && (
+              <div className="flex justify-center">
+                <button
+                  onClick={() => window.open(PLAY_STORE_URL, "_blank")}
+                  className="flex items-center justify-center gap-3 bg-black text-white px-8 py-5 rounded-xl hover:bg-gray-800 transition-colors w-full max-w-sm cursor-pointer"
+                >
+                  <Download className="w-7 h-7" />
+                  <div className="text-left">
+                    <div className="text-xs">Download in</div>
+                    <div className="text-xl font-semibold">Google Play</div>
+                  </div>
+                </button>
+              </div>
+            )}
+
+            {/* Desktop: beide knoppen + QR-code */}
+            {platform === "desktop" && (
+              <>
+                <div className="relative flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  {/* Arrow pointing to App Store */}
+                  <img
+                    src="https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/pijl-8c2851?format=webp&width=800"
+                    alt="Arrow pointing to App Store"
+                    className="absolute -top-20 left-1/2 transform -translate-x-32 w-16 h-16 sm:w-20 sm:h-20"
+                  />
+
+                  {/* Arrow pointing to Google Play Store (mirrored) */}
+                  <img
+                    src="https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/pijl-8c2851?format=webp&width=800"
+                    alt="Arrow pointing to Google Play Store"
+                    className="absolute -top-20 right-1/2 transform translate-x-32 scale-x-[-1] w-16 h-16 sm:w-20 sm:h-20"
+                  />
+
+                  <div
+                    className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors cursor-pointer"
+                    onClick={() => window.open(APP_STORE_URL, "_blank")}
+                  >
+                    <Download className="w-6 h-6" />
+                    <div className="text-left">
+                      <div className="text-xs">Download on the</div>
+                      <div className="text-lg font-semibold">App Store</div>
+                    </div>
+                  </div>
+                  <div
+                    className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors cursor-pointer"
+                    onClick={() => window.open(PLAY_STORE_URL, "_blank")}
+                  >
+                    <Download className="w-6 h-6" />
+                    <div className="text-left">
+                      <div className="text-xs">Get it on</div>
+                      <div className="text-lg font-semibold">Google Play</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* QR-code voor desktop-bezoekers */}
+                <div className="mt-12 flex flex-col items-center">
+                  <div className="flex items-center gap-4 mb-6 w-full max-w-xs">
+                    <div className="h-px flex-1 bg-gray-300"></div>
+                    <span className="text-sm text-gray-500 uppercase tracking-wide">
+                      of scan met je telefoon
+                    </span>
+                    <div className="h-px flex-1 bg-gray-300"></div>
+                  </div>
+                  <img
+                    src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=8&data=${encodeURIComponent(window.location.origin + "/app")}`}
+                    alt="QR-code naar Calcuu"
+                    className="w-48 h-48 bg-white border-2 border-gray-200 rounded-lg p-2"
+                  />
+                  <p className="text-sm text-gray-500 mt-4 max-w-xs text-center">
+                    Scan met je telefoon — je gaat direct door naar de juiste
+                    app-store.
+                  </p>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </section>
