@@ -903,7 +903,7 @@ const Home = () => {
               {/* Header */}
               <div className="text-center mb-12">
                 <h2 className="text-4xl md:text-5xl font-bold text-calcuu-secondary mb-4">
-                  Tijdelijke Superactie.
+                  Super Actie!
                 </h2>
                 <p className="text-lg text-calcuu-text-sub max-w-2xl mx-auto">
                   Voor de eerste {FOUNDER_TOTAL} schilders die meebouwen aan
@@ -996,15 +996,15 @@ const Home = () => {
                       }
                     }}
                   >
-                    Tijdelijke Superactie
+                    Super Actie!
                   </Button>
                 </div>
 
                 {/* Voetnoot */}
                 <p className="text-xs text-gray-500 text-center mt-4 px-4 leading-relaxed">
-                  Na de eerste {FOUNDER_TOTAL} founders geldt de reguliere prijs
-                  van €{REGULAR_PRICE}/maand. Aanbieding alleen voor nieuwe
-                  gebruikers.
+                  Na de eerste {FOUNDER_TOTAL} deelnemers geldt de reguliere
+                  prijs van €{REGULAR_PRICE}/maand. Aanbieding alleen voor
+                  nieuwe gebruikers.
                 </p>
               </div>
             </div>
