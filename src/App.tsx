@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Privacy from "./pages/Privacy";
 import ComingSoon from "./pages/ComingSoon";
+import GetApp from "./pages/GetApp";
 import NotFound from "./pages/NotFound";
 import DevNav from "./components/DevNav";
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/" element={<Home />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/coming-soon" element={<ComingSoon />} />
+          <Route path="/app" element={<GetApp />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

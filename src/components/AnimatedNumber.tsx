@@ -4,6 +4,7 @@ interface AnimatedNumberProps {
   value: number;
   duration?: number;
   decimals?: number;
+  smartDecimals?: boolean;
   className?: string;
   prefix?: string;
   suffix?: string;
@@ -13,6 +14,7 @@ const AnimatedNumber: React.FC<AnimatedNumberProps> = ({
   value,
   duration = 600,
   decimals = 0,
+  smartDecimals = false,
   className = "",
   prefix = "",
   suffix = "",
@@ -46,7 +48,19 @@ const AnimatedNumber: React.FC<AnimatedNumberProps> = ({
   }, [value, duration]);
 
   const formatNumber = (num: number) => {
-    return num.toFixed(decimals);
+    let effectiveDecimals = decimals;
+    // Strip trailing .0 / .00 etc. when the number is effectively whole
+    if (smartDecimals && decimals > 0) {
+      const rounded = parseFloat(num.toFixed(decimals));
+      if (Number.isInteger(rounded)) {
+        effectiveDecimals = 0;
+      }
+    }
+    // Use Dutch locale: "." for thousands, "," for decimals (e.g. "4.860", "21,6")
+    return num.toLocaleString("nl-NL", {
+      minimumFractionDigits: effectiveDecimals,
+      maximumFractionDigits: effectiveDecimals,
+    });
   };
 
   return (

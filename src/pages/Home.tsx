@@ -6,7 +6,30 @@ import Calculator from "@/components/Calculator";
 import CookieBanner from "@/components/CookieBanner";
 import ScrollFadeIn from "@/components/ScrollFadeIn";
 
-const FaqItem = ({ question, answer }: { question: string; answer: string }) => {
+const APP_STORE_URL = "https://apps.apple.com/nl/app/calcuu/id1609226426";
+const PLAY_STORE_URL =
+  "https://play.google.com/store/apps/details?id=com.calcuu.calcuu";
+
+const detectPlatform = (): "ios" | "android" | "desktop" => {
+  if (typeof window === "undefined") return "desktop";
+  // Test-override via ?platform=ios|android|desktop
+  const override = new URLSearchParams(window.location.search).get("platform");
+  if (override === "ios" || override === "android" || override === "desktop") {
+    return override;
+  }
+  const ua = navigator.userAgent;
+  if (/iPhone|iPad|iPod/.test(ua)) return "ios";
+  if (/Android/.test(ua)) return "android";
+  return "desktop";
+};
+
+const FaqItem = ({
+  question,
+  answer,
+}: {
+  question: string;
+  answer: string;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="border-b border-calcuu-detail">
@@ -14,17 +37,26 @@ const FaqItem = ({ question, answer }: { question: string; answer: string }) => 
         className="w-full flex items-center justify-between py-5 text-left bg-transparent border-none cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="text-lg font-semibold text-calcuu-secondary pr-4">{question}</span>
+        <span className="text-lg font-semibold text-calcuu-secondary pr-4">
+          {question}
+        </span>
         <svg
           className={`w-5 h-5 text-calcuu-primary flex-shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
         </svg>
       </button>
-      <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-96 opacity-100 pb-5" : "max-h-0 opacity-0"}`}>
+      <div
+        className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-96 opacity-100 pb-5" : "max-h-0 opacity-0"}`}
+      >
         <p className="text-calcuu-text-sub leading-relaxed">{answer}</p>
       </div>
     </div>
@@ -34,6 +66,9 @@ const FaqItem = ({ question, answer }: { question: string; answer: string }) => 
 const Home = () => {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [platform] = useState<"ios" | "android" | "desktop">(() =>
+    detectPlatform(),
+  );
 
   const handlePlayVideo = () => {
     setIsVideoPlaying(true);
@@ -392,99 +427,99 @@ const Home = () => {
       <section id="features" className="py-16 lg:py-24 bg-calcuu-white">
         <div className="container mx-auto px-4">
           <ScrollFadeIn>
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-calcuu-primary mb-6 tracking-tight">
-              Bereken en verstuur de offerte direct op locatie.
-            </h2>
-            <p className="text-lg md:text-xl text-calcuu-text-sub leading-relaxed max-w-3xl mx-auto">
-              Geen gedoe meer met ingewikkelde spreadsheets of handmatige
-              berekeningen. Maak professionele offertes voor binnen- en
-              buitenwerk in minuten, geen uren.
-            </p>
-          </div>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-calcuu-primary mb-6 tracking-tight">
+                Bereken en verstuur de offerte direct op locatie.
+              </h2>
+              <p className="text-lg md:text-xl text-calcuu-text-sub leading-relaxed max-w-3xl mx-auto">
+                Geen gedoe meer met ingewikkelde spreadsheets of handmatige
+                berekeningen. Maak professionele offertes voor binnen- en
+                buitenwerk in minuten, geen uren.
+              </p>
+            </div>
           </ScrollFadeIn>
 
           <ScrollFadeIn>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {/* Left Side - 50% width - 1 block */}
-            <div className="lg:col-span-1">
-              <div className="bg-calcuu-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-calcuu-detail flex flex-col min-h-[207px] mr-0.5 -mb-1 px-8 pt-8 pb-16">
-                <div className="flex gap-5 max-md:flex-col max-md:gap-0">
-                  <div className="flex flex-col w-1/2 max-md:ml-0 max-md:w-full">
-                    <h3 className="text-xl font-semibold text-calcuu-secondary mt-5 mb-4">
-                      Visuele Calculatie
-                    </h3>
-                    <p className="text-calcuu-text-sub leading-relaxed">
-                      Teken je project direct in de app en krijg automatisch
-                      nauwkeurige berekeningen voor materiaal, arbeid en
-                      totaalprijs.
-                      <br />
-                      <br />
-                      Zowel met het binnen- als buitenwerk worden alle kozijnen,
-                      ramen, deuren, direct berekend.
-                      <br />
-                    </p>
-                  </div>
-                  <div className="flex flex-col ml-5 w-1/2 max-md:ml-0 max-md:w-full">
-                    <img
-                      loading="lazy"
-                      src="https://cdn.builder.io/api/v1/image/assets%2F4370c0c81082416ebba6e6fcedf1fc84%2F5b56eb342c2e4f31a15814e558107f2d"
-                      alt="Visuele Calculatie"
-                      className="aspect-[0.5] object-cover object-top w-full mt-5 min-h-5 min-w-5 overflow-hidden"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Side - 50% width - 2 blocks stacked */}
-            <div className="lg:col-span-1 flex flex-col gap-8 justify-start -ml-px">
-              <div className="bg-calcuu-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-calcuu-detail justify-start ml-auto flex flex-col">
-                <div className="flex gap-5 max-md:flex-col max-md:gap-0">
-                  <div className="flex flex-col w-1/2 max-md:ml-0 max-md:w-full">
-                    <h3 className="text-xl font-semibold text-calcuu-secondary mb-4">
-                      Urenregistratie
-                    </h3>
-                    <p className="text-calcuu-text-sub leading-relaxed">
-                      Houd alles overzichtelijk zoals je uren per project, foto
-                      documentatie, klantbeheer, materiaalbeheer en dat allemaal
-                      in één app.
-                    </p>
-                  </div>
-                  <div className="flex flex-col ml-5 w-1/2 max-md:ml-0 max-md:w-full">
-                    <img
-                      loading="lazy"
-                      src="https://cdn.builder.io/api/v1/image/assets%2F4370c0c81082416ebba6e6fcedf1fc84%2Fec3c5b217a284078a3636c326043c92f"
-                      alt="Directe offreren"
-                      className="aspect-[1.16] object-cover object-bottom w-full mt-5 min-h-5 min-w-5 overflow-hidden"
-                    />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+              {/* Left Side - 50% width - 1 block */}
+              <div className="lg:col-span-1">
+                <div className="bg-calcuu-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-calcuu-detail flex flex-col min-h-[207px] mr-0.5 -mb-1 px-8 pt-8 pb-16">
+                  <div className="flex gap-5 max-md:flex-col max-md:gap-0">
+                    <div className="flex flex-col w-1/2 max-md:ml-0 max-md:w-full">
+                      <h3 className="text-xl font-semibold text-calcuu-secondary mt-5 mb-4">
+                        Visuele Calculatie
+                      </h3>
+                      <p className="text-calcuu-text-sub leading-relaxed">
+                        Teken je project direct in de app en krijg automatisch
+                        nauwkeurige berekeningen voor materiaal, arbeid en
+                        totaalprijs.
+                        <br />
+                        <br />
+                        Zowel met het binnen- als buitenwerk worden alle
+                        kozijnen, ramen, deuren, direct berekend.
+                        <br />
+                      </p>
+                    </div>
+                    <div className="flex flex-col ml-5 w-1/2 max-md:ml-0 max-md:w-full">
+                      <img
+                        loading="lazy"
+                        src="https://cdn.builder.io/api/v1/image/assets%2F4370c0c81082416ebba6e6fcedf1fc84%2F5b56eb342c2e4f31a15814e558107f2d"
+                        alt="Visuele Calculatie"
+                        className="aspect-[0.5] object-cover object-top w-full mt-5 min-h-5 min-w-5 overflow-hidden"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-calcuu-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-calcuu-detail justify-start ml-auto flex flex-col">
-                <div className="flex gap-5 max-md:flex-col max-md:gap-0">
-                  <div className="flex flex-col w-1/2 max-md:ml-0 max-md:w-full">
-                    <h3 className="text-xl font-semibold text-calcuu-secondary mb-4">
-                      Direct offreren
-                    </h3>
-                    <p className="text-calcuu-text-sub leading-relaxed">
-                      Genereer overzichtelijke en professionele offertes ter
-                      plekke bij de klant.
-                    </p>
+              {/* Right Side - 50% width - 2 blocks stacked */}
+              <div className="lg:col-span-1 flex flex-col gap-8 justify-start -ml-px">
+                <div className="bg-calcuu-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-calcuu-detail justify-start ml-auto flex flex-col">
+                  <div className="flex gap-5 max-md:flex-col max-md:gap-0">
+                    <div className="flex flex-col w-1/2 max-md:ml-0 max-md:w-full">
+                      <h3 className="text-xl font-semibold text-calcuu-secondary mb-4">
+                        Urenregistratie
+                      </h3>
+                      <p className="text-calcuu-text-sub leading-relaxed">
+                        Houd alles overzichtelijk zoals je uren per project,
+                        foto documentatie, klantbeheer, materiaalbeheer en dat
+                        allemaal in één app.
+                      </p>
+                    </div>
+                    <div className="flex flex-col ml-5 w-1/2 max-md:ml-0 max-md:w-full">
+                      <img
+                        loading="lazy"
+                        src="https://cdn.builder.io/api/v1/image/assets%2F4370c0c81082416ebba6e6fcedf1fc84%2Fec3c5b217a284078a3636c326043c92f"
+                        alt="Directe offreren"
+                        className="aspect-[1.16] object-cover object-bottom w-full mt-5 min-h-5 min-w-5 overflow-hidden"
+                      />
+                    </div>
                   </div>
-                  <div className="flex flex-col ml-5 w-1/2 max-md:ml-0 max-md:w-full">
-                    <img
-                      loading="lazy"
-                      src="https://cdn.builder.io/api/v1/image/assets%2F4370c0c81082416ebba6e6fcedf1fc84%2F5514f8cbf39b428b975beafed6af49bf"
-                      alt="Alles-in-één"
-                      className="aspect-[1.35] object-cover object-top w-full mt-5 min-h-5 min-w-5 overflow-hidden"
-                    />
+                </div>
+
+                <div className="bg-calcuu-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-calcuu-detail justify-start ml-auto flex flex-col">
+                  <div className="flex gap-5 max-md:flex-col max-md:gap-0">
+                    <div className="flex flex-col w-1/2 max-md:ml-0 max-md:w-full">
+                      <h3 className="text-xl font-semibold text-calcuu-secondary mb-4">
+                        Direct offreren
+                      </h3>
+                      <p className="text-calcuu-text-sub leading-relaxed">
+                        Genereer overzichtelijke en professionele offertes ter
+                        plekke bij de klant.
+                      </p>
+                    </div>
+                    <div className="flex flex-col ml-5 w-1/2 max-md:ml-0 max-md:w-full">
+                      <img
+                        loading="lazy"
+                        src="https://cdn.builder.io/api/v1/image/assets%2F4370c0c81082416ebba6e6fcedf1fc84%2F5514f8cbf39b428b975beafed6af49bf"
+                        alt="Alles-in-één"
+                        className="aspect-[1.35] object-cover object-top w-full mt-5 min-h-5 min-w-5 overflow-hidden"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
           </ScrollFadeIn>
         </div>
       </section>
@@ -492,47 +527,47 @@ const Home = () => {
       {/* Demo Video Section */}
       <section id="demo" className="py-16 lg:py-24 bg-calcuu-background">
         <ScrollFadeIn>
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold text-calcuu-secondary mb-4">
-            Zie Calcuu in actie
-          </h2>
-          <p className="text-lg text-calcuu-text-sub mb-12 max-w-2xl mx-auto">
-            Bekijk hoe snel je van schets naar offerte gaat.
-          </p>
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl md:text-4xl font-semibold text-calcuu-secondary mb-4">
+              Zie Calcuu in actie
+            </h2>
+            <p className="text-lg text-calcuu-text-sub mb-12 max-w-2xl mx-auto">
+              Bekijk hoe snel je van schets naar offerte gaat.
+            </p>
 
-          <div className="max-w-4xl mx-auto">
-            <div className="relative bg-calcuu-detail rounded-2xl aspect-video overflow-hidden shadow-lg">
-              {!isVideoPlaying ? (
-                <div
-                  className="absolute inset-0 flex items-center justify-center cursor-pointer"
-                  onClick={handlePlayVideo}
-                >
-                  <img
-                    src="https://cdn.builder.io/api/v1/image/assets%2F4370c0c81082416ebba6e6fcedf1fc84%2F1af5348599114d869b193511ef9c0717?format=webp&width=800"
-                    alt="Calcuu Demo Video Thumbnail"
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-black/20 hover:bg-black/30 transition-all duration-300"></div>
-                  <Button
-                    size="lg"
-                    variant="ghost"
-                    className="bg-calcuu-white/90 hover:bg-calcuu-white text-calcuu-secondary rounded-full w-20 h-20 shadow-lg relative z-10 hover:scale-105 transition-transform duration-300"
+            <div className="max-w-4xl mx-auto">
+              <div className="relative bg-calcuu-detail rounded-2xl aspect-video overflow-hidden shadow-lg">
+                {!isVideoPlaying ? (
+                  <div
+                    className="absolute inset-0 flex items-center justify-center cursor-pointer"
+                    onClick={handlePlayVideo}
                   >
-                    <Play className="w-8 h-8" />
-                  </Button>
-                </div>
-              ) : (
-                <iframe
-                  src="https://www.youtube.com/embed/uL34L4Cy9cs?autoplay=1&mute=1&rel=0&modestbranding=1&showinfo=0&controls=1"
-                  title="Calcuu Demo Video"
-                  className="w-full h-full rounded-2xl"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                />
-              )}
+                    <img
+                      src="https://cdn.builder.io/api/v1/image/assets%2F4370c0c81082416ebba6e6fcedf1fc84%2F1af5348599114d869b193511ef9c0717?format=webp&width=800"
+                      alt="Calcuu Demo Video Thumbnail"
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/20 hover:bg-black/30 transition-all duration-300"></div>
+                    <Button
+                      size="lg"
+                      variant="ghost"
+                      className="bg-calcuu-white/90 hover:bg-calcuu-white text-calcuu-secondary rounded-full w-20 h-20 shadow-lg relative z-10 hover:scale-105 transition-transform duration-300"
+                    >
+                      <Play className="w-8 h-8" />
+                    </Button>
+                  </div>
+                ) : (
+                  <iframe
+                    src="https://www.youtube.com/embed/uL34L4Cy9cs?autoplay=1&mute=1&rel=0&modestbranding=1&showinfo=0&controls=1"
+                    title="Calcuu Demo Video"
+                    className="w-full h-full rounded-2xl"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                )}
+              </div>
             </div>
           </div>
-        </div>
         </ScrollFadeIn>
       </section>
 
@@ -850,292 +885,198 @@ const Home = () => {
       </section>
       <Calculator />
 
-      {/* Pricing Section */}
-      <section id="pricing" className="py-16 lg:py-24 bg-gray-50">
-        <div className="container mx-auto px-4">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-calcuu-secondary mb-4">
-              Transparant. Simpel.
-              <br />
-              Upgrade Wanneer jij wilt.
-            </h2>
-            <p className="text-lg text-calcuu-text-sub mb-8 max-w-2xl mx-auto">
-              Nu tijdelijk
-              <span className="text-calcuu-primary font-bold">
-                &nbsp;Mega Korting
-              </span>
-              &nbsp;op een jaarlijks abonnement
-              <br />
-              Begin <strong>gratis</strong>&nbsp;en maak je keuze later.
-            </p>
+      {/* Pricing Section — Founder Member offer */}
+      {(() => {
+        const FOUNDER_COUNT = 4;
+        const FOUNDER_TOTAL = 75;
+        const FOUNDER_PRICE = 15;
+        const FOUNDER_YEARLY = FOUNDER_PRICE * 12;
+        const REGULAR_PRICE = 47;
+        const remaining = FOUNDER_TOTAL - FOUNDER_COUNT;
+        const progressPercent = Math.round(
+          (FOUNDER_COUNT / FOUNDER_TOTAL) * 100,
+        );
 
-            {/* Billing Toggle */}
-            <div className="flex items-center justify-center gap-4 mb-12">
-              <span className="text-calcuu-secondary">Maandelijks</span>
-              <div className="relative">
-                <input
-                  type="checkbox"
-                  id="billing-toggle"
-                  className="sr-only"
-                  defaultChecked
-                  onChange={(e) => {
-                    const isAnnual = e.target.checked;
-                    const monthlyPrices =
-                      document.querySelectorAll(".monthly-price");
-                    const yearlyPrices =
-                      document.querySelectorAll(".yearly-price");
-                    const toggle = document.querySelector(
-                      "#billing-toggle + label > div",
-                    );
-                    const yearlyBadge = document.querySelector(".yearly-badge");
-
-                    if (isAnnual) {
-                      monthlyPrices.forEach((p) => p.classList.add("hidden"));
-                      yearlyPrices.forEach((p) => p.classList.remove("hidden"));
-                      toggle.style.transform = "translateX(24px)";
-                      toggle.parentElement.style.backgroundColor = "#5B29DE";
-                      yearlyBadge.classList.remove("hidden");
-                    } else {
-                      monthlyPrices.forEach((p) =>
-                        p.classList.remove("hidden"),
-                      );
-                      yearlyPrices.forEach((p) => p.classList.add("hidden"));
-                      toggle.style.transform = "translateX(0px)";
-                      toggle.parentElement.style.backgroundColor = "#e5e7eb";
-                      yearlyBadge.classList.add("hidden");
-                    }
-                  }}
-                />
-                <label
-                  htmlFor="billing-toggle"
-                  className="flex items-center cursor-pointer bg-calcuu-primary w-12 h-6 rounded-full p-1 transition-all duration-300"
-                >
-                  <div className="bg-white w-4 h-4 rounded-full shadow-sm transform translate-x-6 transition-transform duration-300"></div>
-                </label>
-              </div>
-              <span className="text-calcuu-secondary">Jaarlijks</span>
-              <span className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-semibold animate-pulse yearly-badge">
-                BESPAAR 36%
-              </span>
-            </div>
-          </div>
-
-          {/* Pricing Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Starter Plan */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-calcuu-detail h-auto md:h-[600px] flex flex-col">
-              <h3 className="text-2xl font-bold text-calcuu-secondary mb-2">
-                Starter
-              </h3>
-              <div className="mb-6">
-                <div className="monthly-price hidden">
-                  <span className="text-4xl font-bold text-calcuu-secondary">
-                    €0
-                  </span>
-                  <span className="text-calcuu-text-sub ml-2">
-                    14 dagen gratis
-                  </span>
-                </div>
-                <div className="yearly-price">
-                  <span className="text-4xl font-bold text-calcuu-secondary">
-                    €0
-                  </span>
-                  <span className="text-calcuu-text-sub ml-2">
-                    14 dagen gratis
-                  </span>
-                </div>
-              </div>
-              <p className="text-calcuu-text-sub mb-6">
-                Ideaal voor schilders die snel, eenvoudige en professionele
-                offertes willen maken.
-              </p>
-
-              <Button
-                size="lg"
-                variant="outline"
-                className="w-full border-2 border-calcuu-primary text-calcuu-primary hover:bg-calcuu-primary hover:text-white font-semibold py-3 rounded-lg transition-all duration-300 mb-6"
-                onClick={() => {
-                  const downloadSection = document.getElementById("download");
-                  if (downloadSection) {
-                    downloadSection.scrollIntoView({ behavior: "smooth" });
-                  }
-                }}
-              >
-                Probeer Gratis
-              </Button>
-
-              <div className="space-y-4 flex-grow">
-                <p className="font-semibold text-calcuu-secondary">
-                  Starter functies:
+        return (
+          <section id="pricing" className="py-16 lg:py-24 bg-gray-50">
+            <div className="container mx-auto px-4">
+              {/* Header */}
+              <div className="text-center mb-12">
+                <h2 className="text-4xl md:text-5xl font-bold text-calcuu-secondary mb-4">
+                  Word Founder Member.
+                </h2>
+                <p className="text-lg text-calcuu-text-sub max-w-2xl mx-auto">
+                  Voor de eerste {FOUNDER_TOTAL} schilders die meebouwen aan
+                  Calcuu.
                 </p>
-                <div className="space-y-3 text-sm">
-                  {[
-                    "Onbeperkte projecten",
-                    "Calculatie voor binnen- en buitenwerk",
-                    "Professionele offertes met logo",
-                    "Email ondersteuning",
-                    "Basis materiaal database",
-                    "14 dagen toegang",
-                  ].map((feature, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <CheckCircle className="w-4 h-4 text-calcuu-primary" />
-                      <span className="text-calcuu-text-sub">{feature}</span>
-                    </div>
-                  ))}
-                </div>
               </div>
-            </div>
 
-            {/* Professional Plan */}
-            <div
-              className="rounded-2xl p-8 shadow-lg border-2 border-calcuu-primary relative h-auto md:h-[600px] flex flex-col"
-              style={{ backgroundColor: "#f8f6fc" }}
-            >
-              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-calcuu-primary text-white px-4 py-1 rounded-full text-sm font-semibold">
-                Meest Populair
-              </div>
-              <h3 className="text-2xl font-bold text-calcuu-primary mb-2">
-                Professional
-              </h3>
-              <div className="mb-6">
-                <div className="monthly-price hidden">
-                  <span className="text-4xl font-bold text-calcuu-secondary">
-                    €60
-                  </span>
-                  <span className="text-calcuu-text-sub ml-2">per maand</span>
-                </div>
-                <div className="yearly-price">
-                  <span className="text-4xl font-bold text-calcuu-secondary">
-                    €45
-                  </span>
-                  <span className="text-calcuu-text-sub ml-2">per maand</span>
-                  <div className="text-sm text-green-500 font-semibold">
-                    36% KORTING!
+              {/* Eén gecentreerde kaart */}
+              <div className="max-w-xl mx-auto">
+                <div className="bg-white rounded-2xl shadow-xl border-2 border-calcuu-primary p-6 md:p-8 relative">
+                  {/* Founder badge */}
+                  <div className="flex justify-center mb-6">
+                    <span className="inline-flex items-center gap-2 bg-calcuu-primary text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase">
+                      🔨 Founder Member
+                    </span>
                   </div>
-                </div>
-              </div>
-              <p className="text-calcuu-text-sub mb-6">
-                Voor ervaren schilders die hun bedrijf willen laten groeien
-              </p>
 
-              <Button
-                size="lg"
-                className="w-full bg-calcuu-primary hover:bg-calcuu-primary/90 text-white font-semibold py-3 rounded-lg transition-all duration-300 mb-6"
-                onClick={() => {
-                  const downloadSection = document.getElementById("download");
-                  if (downloadSection) {
-                    downloadSection.scrollIntoView({ behavior: "smooth" });
-                  }
-                }}
-              >
-                Start Nu
-              </Button>
-
-              <div className="space-y-4 flex-grow">
-                <p className="font-semibold text-calcuu-secondary">
-                  Alles van "Starter", plus:
-                </p>
-                <div className="space-y-3 text-sm">
-                  {[
-                    "Onbeperkte projecten",
-                    "Calculatie voor binnen- en buitenwerk",
-                    "Professionele offertes met logo",
-                    "Email ondersteuning",
-                    "Basis materiaal database",
-                    "Meerwerk: uren en notities",
-                    "Projectfoto's",
-                  ].map((feature, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <CheckCircle className="w-4 h-4 text-calcuu-primary" />
-                      <span className="text-calcuu-text-sub">{feature}</span>
+                  {/* Progress bar + counter */}
+                  <div className="mb-6">
+                    <div className="flex justify-between items-baseline text-sm mb-2">
+                      <span className="text-calcuu-secondary font-semibold">
+                        {FOUNDER_COUNT} / {FOUNDER_TOTAL} plekken
+                      </span>
+                      <span className="text-calcuu-text-sub text-xs">
+                        Nog {remaining} beschikbaar
+                      </span>
                     </div>
-                  ))}
+                    <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-calcuu-primary transition-all duration-500"
+                        style={{ width: `${progressPercent}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  <hr className="border-gray-200 my-6" />
+
+                  {/* Prijs-blok */}
+                  <div className="text-center mb-2">
+                    <div className="flex items-baseline justify-center gap-1">
+                      <span className="text-6xl font-bold text-calcuu-secondary">
+                        €{FOUNDER_PRICE}
+                      </span>
+                      <span className="text-xl text-calcuu-text-sub">
+                        / maand
+                      </span>
+                    </div>
+                    <p className="text-sm text-calcuu-text-sub mt-2">
+                      Jaarlijks gefactureerd · €{FOUNDER_YEARLY} per jaar
+                    </p>
+                  </div>
+
+                  {/* Price-lock-uitleg */}
+                  <p className="text-center text-sm text-calcuu-text-sub mt-6 px-4 leading-relaxed">
+                    Jouw prijs blijft <strong>€{FOUNDER_PRICE}/maand</strong>{" "}
+                    zolang je gebruiker bent — ook als Calcuu later €
+                    {REGULAR_PRICE}/maand kost.
+                  </p>
+
+                  <hr className="border-gray-200 my-6" />
+
+                  {/* Wat je krijgt */}
+                  <div className="space-y-3 mb-8">
+                    {[
+                      "14 dagen gratis proberen",
+                      "Volledige toegang tot alle functies",
+                      `"Founder Member" status in de app`,
+                      "Direct contact met de oprichter",
+                      "Stem in welke features als eerste komen",
+                      `Lifetime price-lock op €${FOUNDER_PRICE}/maand`,
+                    ].map((feature, index) => (
+                      <div key={index} className="flex items-start gap-3">
+                        <CheckCircle className="w-5 h-5 text-calcuu-primary flex-shrink-0 mt-0.5" />
+                        <span className="text-sm text-calcuu-secondary">
+                          {feature}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* CTA */}
+                  <Button
+                    size="lg"
+                    className="w-full bg-calcuu-primary hover:bg-calcuu-primary/90 text-white font-semibold py-4 rounded-lg transition-all duration-300 text-base"
+                    onClick={() => {
+                      const downloadSection =
+                        document.getElementById("download");
+                      if (downloadSection) {
+                        downloadSection.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }}
+                  >
+                    Word Founder Member
+                  </Button>
                 </div>
+
+                {/* Voetnoot */}
+                <p className="text-xs text-gray-500 text-center mt-4 px-4 leading-relaxed">
+                  Na de eerste {FOUNDER_TOTAL} founders geldt de reguliere prijs
+                  van €{REGULAR_PRICE}/maand. Aanbieding alleen voor nieuwe
+                  gebruikers.
+                </p>
               </div>
             </div>
-
-            {/* Enterprise Plan */}
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-calcuu-detail h-auto md:h-[600px] flex flex-col">
-              <h3 className="text-2xl font-bold text-calcuu-secondary mb-2">
-                Enterprise
-              </h3>
-              <div className="mb-6">
-                <span className="text-lg text-calcuu-text-sub">
-                  Neem contact op
-                </span>
-              </div>
-              <p className="text-calcuu-text-sub mb-6">
-                Voor grote schildersbedrijven met meerdere teams en complexe
-                behoeften
-              </p>
-
-              <Button
-                size="lg"
-                variant="outline"
-                className="w-full border-2 border-calcuu-secondary text-calcuu-secondary hover:bg-calcuu-secondary hover:text-white font-semibold py-3 rounded-lg transition-all duration-300 mb-6"
-                onClick={() => window.location.href = "mailto:info@calcuu.nl?subject=Enterprise%20aanvraag"}
-              >
-                Contact Ons
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+          </section>
+        );
+      })()}
 
       {/* Testimonials Section */}
       <section className="py-16 lg:py-24 bg-calcuu-background">
         <ScrollFadeIn>
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-semibold text-calcuu-secondary text-center mb-4">
-            Wat schilders zeggen over Calcuu
-          </h2>
-          <p className="text-lg text-calcuu-text-sub text-center mb-12 max-w-2xl mx-auto">
-            Ontdek waarom vakschilders overstappen naar Calcuu.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {[
-              {
-                name: "Mark de Vries",
-                role: "Vakschilder, ZZP",
-                quote: "Voorheen zat ik elke avond uren achter de laptop om offertes te maken. Met Calcuu doe ik het nu ter plekke bij de klant. Scheelt mij zeker 5 uur per week.",
-                stars: 5,
-              },
-              {
-                name: "Peter Jansen",
-                role: "Eigenaar Schildersbedrijf",
-                quote: "De automatische materiaalberekening is een gamechanger. Geen gedoe meer met Excel-sheets. Mijn offertes zien er ook veel professioneler uit.",
-                stars: 5,
-              },
-              {
-                name: "Dennis Bakker",
-                role: "Vakschilder, 15 jaar ervaring",
-                quote: "Eindelijk een app die begrijpt wat een schilder nodig heeft. Simpel, snel en precies. Mijn klanten zijn onder de indruk van de snelle offertes.",
-                stars: 5,
-              },
-            ].map((review, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-all duration-300"
-              >
-                <div className="flex gap-1 mb-4">
-                  {Array.from({ length: review.stars }).map((_, i) => (
-                    <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl md:text-4xl font-semibold text-calcuu-secondary text-center mb-4">
+              Wat schilders zeggen over Calcuu
+            </h2>
+            <p className="text-lg text-calcuu-text-sub text-center mb-12 max-w-2xl mx-auto">
+              Ontdek waarom vakschilders overstappen naar Calcuu.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              {[
+                {
+                  name: "Mark de Vries",
+                  role: "Vakschilder, ZZP",
+                  quote:
+                    "Voorheen zat ik elke avond uren achter de laptop om offertes te maken. Met Calcuu doe ik het nu ter plekke bij de klant. Scheelt mij zeker 5 uur per week.",
+                  stars: 5,
+                },
+                {
+                  name: "Peter Jansen",
+                  role: "Eigenaar Schildersbedrijf",
+                  quote:
+                    "De automatische materiaalberekening is een gamechanger. Geen gedoe meer met Excel-sheets. Mijn offertes zien er ook veel professioneler uit.",
+                  stars: 5,
+                },
+                {
+                  name: "Dennis Bakker",
+                  role: "Vakschilder, 15 jaar ervaring",
+                  quote:
+                    "Eindelijk een app die begrijpt wat een schilder nodig heeft. Simpel, snel en precies. Mijn klanten zijn onder de indruk van de snelle offertes.",
+                  stars: 5,
+                },
+              ].map((review, index) => (
+                <div
+                  key={index}
+                  className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-all duration-300"
+                >
+                  <div className="flex gap-1 mb-4">
+                    {Array.from({ length: review.stars }).map((_, i) => (
+                      <svg
+                        key={i}
+                        className="w-5 h-5 text-yellow-400"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                  <p className="text-calcuu-text-sub leading-relaxed mb-6 italic">
+                    "{review.quote}"
+                  </p>
+                  <div>
+                    <p className="font-semibold text-calcuu-secondary">
+                      {review.name}
+                    </p>
+                    <p className="text-sm text-calcuu-text-sub">
+                      {review.role}
+                    </p>
+                  </div>
                 </div>
-                <p className="text-calcuu-text-sub leading-relaxed mb-6 italic">
-                  "{review.quote}"
-                </p>
-                <div>
-                  <p className="font-semibold text-calcuu-secondary">{review.name}</p>
-                  <p className="text-sm text-calcuu-text-sub">{review.role}</p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
         </ScrollFadeIn>
       </section>
 
@@ -1182,73 +1123,99 @@ const Home = () => {
               <span className="text-5xl bg-gray-50">Download Calcuu</span>
             </h2>
 
-            <div className="relative flex flex-col sm:flex-row gap-4 justify-center items-center">
-              {/* Arrow pointing to App Store */}
-              <img
-                src="https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/pijl-8c2851?format=webp&width=800"
-                alt="Arrow pointing to App Store"
-                className="absolute -top-20 left-1/2 transform -translate-x-32 w-16 h-16 sm:w-20 sm:h-20"
-              />
-
-              {/* Arrow pointing to Google Play Store (mirrored) */}
-              <img
-                src="https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/pijl-8c2851?format=webp&width=800"
-                alt="Arrow pointing to Google Play Store"
-                className="absolute -top-20 right-1/2 transform translate-x-32 scale-x-[-1] w-16 h-16 sm:w-20 sm:h-20"
-              />
-
-              <div
-                className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors cursor-pointer"
-                onClick={() =>
-                  window.open(
-                    "https://apps.apple.com/nl/app/calcuu/id1609226426",
-                    "_blank",
-                  )
-                }
-              >
-                <Download className="w-6 h-6" />
-                <div className="text-left">
-                  <div className="text-xs">Download on the</div>
-                  <div className="text-lg font-semibold">App Store</div>
-                </div>
+            {/* iOS: alleen App Store-knop */}
+            {platform === "ios" && (
+              <div className="flex justify-center">
+                <button
+                  onClick={() => window.open(APP_STORE_URL, "_blank")}
+                  className="flex items-center justify-center gap-3 bg-black text-white px-8 py-5 rounded-xl hover:bg-gray-800 transition-colors w-full max-w-sm cursor-pointer"
+                >
+                  <Download className="w-7 h-7" />
+                  <div className="text-left">
+                    <div className="text-xs">Download in de</div>
+                    <div className="text-xl font-semibold">App Store</div>
+                  </div>
+                </button>
               </div>
-              <div
-                className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors cursor-pointer"
-                onClick={() =>
-                  window.open(
-                    "https://play.google.com/store/apps/details?id=com.calcuu.calcuu",
-                    "_blank",
-                  )
-                }
-              >
-                <Download className="w-6 h-6" />
-                <div className="text-left">
-                  <div className="text-xs">Get it on</div>
-                  <div className="text-lg font-semibold">Google Play</div>
-                </div>
-              </div>
-            </div>
-          </div>
+            )}
 
-          <div className="flex justify-center">
-            <img
-              src={(() => {
-                const mockups = [
-                  "https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/1.-download-mockup-a252b2?format=webp&width=800",
-                  "https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/2.-download-mockup-9ff884?format=webp&width=800",
-                  "https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/3.-download-mockup-d06f78?format=webp&width=800",
-                  "https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/4.-download-mockup-f4d202?format=webp&width=800",
-                  "https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/5.-download-mockup-7d5392?format=webp&width=800",
-                  "https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/6.-download-mockup-cf2992?format=webp&width=800",
-                  "https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/7.-download-mockup-37546e?format=webp&width=800",
-                  "https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/8.-download-mockup-39e04a?format=webp&width=800",
-                ];
-                return mockups[Math.floor(Math.random() * mockups.length)];
-              })()}
-              alt="Professionele schilder gebruikt Calcuu app"
-              className="max-w-full h-auto"
-              style={{ maxHeight: "600px", width: "auto" }}
-            />
+            {/* Android: alleen Google Play-knop */}
+            {platform === "android" && (
+              <div className="flex justify-center">
+                <button
+                  onClick={() => window.open(PLAY_STORE_URL, "_blank")}
+                  className="flex items-center justify-center gap-3 bg-black text-white px-8 py-5 rounded-xl hover:bg-gray-800 transition-colors w-full max-w-sm cursor-pointer"
+                >
+                  <Download className="w-7 h-7" />
+                  <div className="text-left">
+                    <div className="text-xs">Download in</div>
+                    <div className="text-xl font-semibold">Google Play</div>
+                  </div>
+                </button>
+              </div>
+            )}
+
+            {/* Desktop: beide knoppen + QR-code */}
+            {platform === "desktop" && (
+              <>
+                <div className="relative flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  {/* Arrow pointing to App Store */}
+                  <img
+                    src="https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/pijl-8c2851?format=webp&width=800"
+                    alt="Arrow pointing to App Store"
+                    className="absolute -top-20 left-1/2 transform -translate-x-32 w-16 h-16 sm:w-20 sm:h-20"
+                  />
+
+                  {/* Arrow pointing to Google Play Store (mirrored) */}
+                  <img
+                    src="https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/pijl-8c2851?format=webp&width=800"
+                    alt="Arrow pointing to Google Play Store"
+                    className="absolute -top-20 right-1/2 transform translate-x-32 scale-x-[-1] w-16 h-16 sm:w-20 sm:h-20"
+                  />
+
+                  <div
+                    className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors cursor-pointer"
+                    onClick={() => window.open(APP_STORE_URL, "_blank")}
+                  >
+                    <Download className="w-6 h-6" />
+                    <div className="text-left">
+                      <div className="text-xs">Download on the</div>
+                      <div className="text-lg font-semibold">App Store</div>
+                    </div>
+                  </div>
+                  <div
+                    className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors cursor-pointer"
+                    onClick={() => window.open(PLAY_STORE_URL, "_blank")}
+                  >
+                    <Download className="w-6 h-6" />
+                    <div className="text-left">
+                      <div className="text-xs">Get it on</div>
+                      <div className="text-lg font-semibold">Google Play</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* QR-code voor desktop-bezoekers */}
+                <div className="mt-12 flex flex-col items-center">
+                  <div className="flex items-center gap-4 mb-6 w-full max-w-xs">
+                    <div className="h-px flex-1 bg-gray-300"></div>
+                    <span className="text-sm text-gray-500 uppercase tracking-wide">
+                      of scan met je telefoon
+                    </span>
+                    <div className="h-px flex-1 bg-gray-300"></div>
+                  </div>
+                  <img
+                    src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=8&data=${encodeURIComponent(window.location.origin + "/app")}`}
+                    alt="QR-code naar Calcuu"
+                    className="w-48 h-48 bg-white border-2 border-gray-200 rounded-lg p-2"
+                  />
+                  <p className="text-sm text-gray-500 mt-4 max-w-xs text-center">
+                    Scan met je telefoon — je gaat direct door naar de juiste
+                    app-store.
+                  </p>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </section>
@@ -1302,12 +1269,18 @@ const Home = () => {
                   </a>
                 </div>
                 <div>
-                  <a href="/privacy" className="hover:text-white transition-colors">
+                  <a
+                    href="/privacy"
+                    className="hover:text-white transition-colors"
+                  >
                     Voorwaarden
                   </a>
                 </div>
                 <div>
-                  <a href="mailto:support@calcuu.nl" className="hover:text-white transition-colors">
+                  <a
+                    href="mailto:support@calcuu.nl"
+                    className="hover:text-white transition-colors"
+                  >
                     Support
                   </a>
                 </div>
@@ -1317,11 +1290,21 @@ const Home = () => {
             <div>
               <h4 className="font-semibold mb-4">Download</h4>
               <div className="space-y-2">
-                <a href="https://apps.apple.com/nl/app/calcuu/id1609226426" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs bg-white text-black px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                <a
+                  href="https://apps.apple.com/nl/app/calcuu/id1609226426"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-xs bg-white text-black px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+                >
                   <Download className="w-4 h-4" />
                   <span>App Store</span>
                 </a>
-                <a href="https://play.google.com/store/apps/details?id=com.calcuu.calcuu" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs bg-white text-black px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.calcuu.calcuu"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-xs bg-white text-black px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+                >
                   <Download className="w-4 h-4" />
                   <span>Google Play</span>
                 </a>
