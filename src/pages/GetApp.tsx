@@ -47,7 +47,7 @@ const GetApp = () => {
         <div className="flex flex-col gap-3">
           <a
             href={APP_STORE_URL}
-            className="flex items-center justify-center gap-3 bg-black text-white px-6 py-4 rounded-xl hover:bg-gray-800 transition-colors"
+            className="flex items-center justify-center gap-3 bg-black text-white px-6 py-4 rounded-card hover:bg-gray-800 transition-colors"
           >
             <span className="text-left">
               <span className="block text-xs">Download in de</span>
@@ -56,7 +56,7 @@ const GetApp = () => {
           </a>
           <a
             href={PLAY_STORE_URL}
-            className="flex items-center justify-center gap-3 bg-black text-white px-6 py-4 rounded-xl hover:bg-gray-800 transition-colors"
+            className="flex items-center justify-center gap-3 bg-black text-white px-6 py-4 rounded-card hover:bg-gray-800 transition-colors"
           >
             <span className="text-left">
               <span className="block text-xs">Download in</span>

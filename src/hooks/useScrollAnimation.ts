@@ -12,7 +12,7 @@ export const useScrollAnimation = (threshold = 0.15) => {
           observer.unobserve(entry.target);
         }
       },
-      { threshold }
+      { threshold },
     );
 
     if (ref.current) {

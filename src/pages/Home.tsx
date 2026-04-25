@@ -128,9 +128,9 @@ const Home = () => {
               />
               <span
                 className="text-xl lg:text-2xl font-bold text-calcuu-secondary"
-                style={{ fontFamily: "Toxigenesis, sans-serif" }}
+                style={{ fontFamily: "Geist, Inter, sans-serif" }}
               >
-                CALCUU
+                calcuu
               </span>
             </div>
 
@@ -166,7 +166,7 @@ const Home = () => {
             <div className="flex items-center gap-4">
               <Button
                 size="sm"
-                className="hidden sm:inline-flex bg-calcuu-primary hover:bg-calcuu-primary/90 text-white font-semibold px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 h-12"
+                className="hidden sm:inline-flex bg-calcuu-primary hover:bg-calcuu-primary/90 text-white font-semibold px-6 rounded-lg   transition-all duration-300 h-12"
                 onClick={() => {
                   const downloadSection = document.getElementById("download");
                   if (downloadSection) {
@@ -245,7 +245,7 @@ const Home = () => {
               </a>
               <Button
                 size="sm"
-                className="w-full bg-calcuu-primary hover:bg-calcuu-primary/90 text-white font-semibold px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 h-12"
+                className="w-full bg-calcuu-primary hover:bg-calcuu-primary/90 text-white font-semibold px-6 rounded-lg   transition-all duration-300 h-12"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
                   const downloadSection = document.getElementById("download");
@@ -285,7 +285,7 @@ const Home = () => {
               <div className="pt-8 flex flex-col sm:flex-row gap-4">
                 <Button
                   size="lg"
-                  className="bg-calcuu-primary hover:bg-calcuu-primary/90 text-white font-semibold text-lg px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 h-12"
+                  className="bg-calcuu-primary hover:bg-calcuu-primary/90 text-white font-semibold text-lg px-8 rounded-lg   transition-all duration-300 hover:scale-105 h-12"
                   onClick={() => {
                     const downloadSection = document.getElementById("download");
                     if (downloadSection) {
@@ -312,7 +312,7 @@ const Home = () => {
                 <img
                   src="https://cdn.builder.io/api/v1/assets/4370c0c81082416ebba6e6fcedf1fc84/calcuu-offerte-a085b6?format=webp&width=800"
                   alt="Calcuu app offerte voorbeeld op iPhone"
-                  className="h-[400px] lg:h-[600px] w-auto object-contain shadow-2xl"
+                  className="h-[400px] lg:h-[600px] w-auto object-contain "
                   style={{
                     background: "transparent",
                     padding: "0",
@@ -331,9 +331,9 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {/* Block 1 */}
-            <div className="bg-calcuu-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-all duration-300 group">
+            <div className="bg-calcuu-white rounded-card p-8   transition-all duration-300 group">
               <div className="flex justify-between items-start mb-6">
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 rounded-card flex items-center justify-center">
                   <svg
                     className="w-full h-auto text-calcuu-success self-stretch"
                     fill="none"
@@ -365,9 +365,9 @@ const Home = () => {
             </div>
 
             {/* Block 2 */}
-            <div className="bg-calcuu-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-all duration-300 group">
+            <div className="bg-calcuu-white rounded-card p-8   transition-all duration-300 group">
               <div className="flex justify-between items-start mb-6">
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 rounded-card flex items-center justify-center">
                   <svg
                     className="w-full h-auto text-calcuu-success flex flex-col justify-start items-start self-stretch"
                     fill="none"
@@ -393,9 +393,9 @@ const Home = () => {
             </div>
 
             {/* Block 3 */}
-            <div className="bg-calcuu-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-all duration-300 group">
+            <div className="bg-calcuu-white rounded-card p-8   transition-all duration-300 group">
               <div className="flex justify-between items-start mb-6">
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 rounded-card flex items-center justify-center">
                   <svg
                     className="w-full h-auto text-calcuu-success self-stretch"
                     fill="none"
@@ -443,7 +443,7 @@ const Home = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
               {/* Left Side - 50% width - 1 block */}
               <div className="lg:col-span-1">
-                <div className="bg-calcuu-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-calcuu-detail flex flex-col min-h-[207px] mr-0.5 -mb-1 px-8 pt-8 pb-16">
+                <div className="bg-calcuu-white rounded-card   transition-all duration-300 hover:scale-105 border border-calcuu-detail flex flex-col min-h-[207px] mr-0.5 -mb-1 px-8 pt-8 pb-16">
                   <div className="flex gap-5 max-md:flex-col max-md:gap-0">
                     <div className="flex flex-col w-1/2 max-md:ml-0 max-md:w-full">
                       <h3 className="text-xl font-semibold text-calcuu-secondary mt-5 mb-4">
@@ -474,7 +474,7 @@ const Home = () => {
 
               {/* Right Side - 50% width - 2 blocks stacked */}
               <div className="lg:col-span-1 flex flex-col gap-8 justify-start -ml-px">
-                <div className="bg-calcuu-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-calcuu-detail justify-start ml-auto flex flex-col">
+                <div className="bg-calcuu-white rounded-card p-8   transition-all duration-300 hover:scale-105 border border-calcuu-detail justify-start ml-auto flex flex-col">
                   <div className="flex gap-5 max-md:flex-col max-md:gap-0">
                     <div className="flex flex-col w-1/2 max-md:ml-0 max-md:w-full">
                       <h3 className="text-xl font-semibold text-calcuu-secondary mb-4">
@@ -497,7 +497,7 @@ const Home = () => {
                   </div>
                 </div>
 
-                <div className="bg-calcuu-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-calcuu-detail justify-start ml-auto flex flex-col">
+                <div className="bg-calcuu-white rounded-card p-8   transition-all duration-300 hover:scale-105 border border-calcuu-detail justify-start ml-auto flex flex-col">
                   <div className="flex gap-5 max-md:flex-col max-md:gap-0">
                     <div className="flex flex-col w-1/2 max-md:ml-0 max-md:w-full">
                       <h3 className="text-xl font-semibold text-calcuu-secondary mb-4">
@@ -536,7 +536,7 @@ const Home = () => {
             </p>
 
             <div className="max-w-4xl mx-auto">
-              <div className="relative bg-calcuu-detail rounded-2xl aspect-video overflow-hidden shadow-lg">
+              <div className="relative bg-calcuu-detail rounded-card aspect-video overflow-hidden ">
                 {!isVideoPlaying ? (
                   <div
                     className="absolute inset-0 flex items-center justify-center cursor-pointer"
@@ -551,7 +551,7 @@ const Home = () => {
                     <Button
                       size="lg"
                       variant="ghost"
-                      className="bg-calcuu-white/90 hover:bg-calcuu-white text-calcuu-secondary rounded-full w-20 h-20 shadow-lg relative z-10 hover:scale-105 transition-transform duration-300"
+                      className="bg-calcuu-white/90 hover:bg-calcuu-white text-calcuu-secondary rounded-full w-20 h-20  relative z-10 hover:scale-105 transition-transform duration-300"
                     >
                       <Play className="w-8 h-8" />
                     </Button>
@@ -560,7 +560,7 @@ const Home = () => {
                   <iframe
                     src="https://www.youtube.com/embed/uL34L4Cy9cs?autoplay=1&mute=1&rel=0&modestbranding=1&showinfo=0&controls=1"
                     title="Calcuu Demo Video"
-                    className="w-full h-full rounded-2xl"
+                    className="w-full h-full rounded-card"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
                   />
@@ -664,7 +664,7 @@ const Home = () => {
                   <div className="absolute -inset-8 bg-calcuu-primary/5 rounded-full"></div>
 
                   {/* Desktop Mockup */}
-                  <div className="relative z-10 bg-calcuu-secondary rounded-lg p-6 shadow-xl mb-8">
+                  <div className="relative z-10 bg-calcuu-secondary rounded-lg p-6  mb-8">
                     <div className="flex gap-2 mb-4">
                       <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                       <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
@@ -683,7 +683,7 @@ const Home = () => {
                   </div>
 
                   {/* Phone Mockup */}
-                  <div className="absolute -bottom-4 -right-4 w-48 h-96 bg-black rounded-[2rem] p-1 shadow-2xl z-20">
+                  <div className="absolute -bottom-4 -right-4 w-48 h-96 bg-black rounded-[2rem] p-1  z-20">
                     <div className="w-full h-full bg-calcuu-background rounded-[1.5rem] overflow-hidden">
                       <div className="h-8 bg-calcuu-white flex items-center justify-center">
                         <div className="w-20 h-1 bg-black rounded-full opacity-30"></div>
@@ -735,7 +735,7 @@ const Home = () => {
                   },
                 ].map((step, index) => (
                   <div key={index} className="flex gap-6 group">
-                    <div className="flex-shrink-0 w-12 h-12 bg-transparent border-2 border-calcuu-primary text-calcuu-secondary rounded-full flex items-center justify-center font-bold text-lg transition-all duration-300 hover:scale-110 hover:shadow-lg hover:z-10 relative cursor-pointer">
+                    <div className="flex-shrink-0 w-12 h-12 bg-transparent border-2 border-calcuu-primary text-calcuu-secondary rounded-full flex items-center justify-center font-bold text-lg transition-all duration-300 hover:scale-110  hover:z-10 relative cursor-pointer">
                       {step.number}
                     </div>
                     <div className="flex-1 transition-all duration-300 group-hover:translate-x-2">
@@ -771,7 +771,7 @@ const Home = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 max-w-5xl mx-auto">
               {/* Feature Box 4 */}
               <div
-                className="relative bg-white border border-calcuu-primary/20 rounded-lg p-6 h-60 flex flex-col items-center text-center transition-all duration-300 hover:border-calcuu-primary/40 hover:shadow-lg group overflow-hidden"
+                className="relative bg-white border border-calcuu-primary/20 rounded-lg p-6 h-60 flex flex-col items-center text-center transition-all duration-300 hover:border-calcuu-primary/40  group overflow-hidden"
                 style={{
                   boxShadow:
                     "0 0 0 1px rgba(91, 41, 222, 0.1), 0 0 20px rgba(91, 41, 222, 0.1), 0 0 40px rgba(91, 41, 222, 0.05)",
@@ -800,7 +800,7 @@ const Home = () => {
 
               {/* Feature Box 5 */}
               <div
-                className="relative bg-white border border-calcuu-primary/20 rounded-lg p-6 h-60 flex flex-col items-center text-center transition-all duration-300 hover:border-calcuu-primary/40 hover:shadow-lg group overflow-hidden"
+                className="relative bg-white border border-calcuu-primary/20 rounded-lg p-6 h-60 flex flex-col items-center text-center transition-all duration-300 hover:border-calcuu-primary/40  group overflow-hidden"
                 style={{
                   boxShadow:
                     "0 0 0 1px rgba(91, 41, 222, 0.1), 0 0 20px rgba(91, 41, 222, 0.1), 0 0 40px rgba(91, 41, 222, 0.05)",
@@ -833,7 +833,7 @@ const Home = () => {
 
               {/* Feature Box 6 */}
               <div
-                className="relative bg-white border border-calcuu-primary/20 rounded-lg p-6 h-60 flex flex-col items-center text-center transition-all duration-300 hover:border-calcuu-primary/40 hover:shadow-lg group overflow-hidden"
+                className="relative bg-white border border-calcuu-primary/20 rounded-lg p-6 h-60 flex flex-col items-center text-center transition-all duration-300 hover:border-calcuu-primary/40  group overflow-hidden"
                 style={{
                   boxShadow:
                     "0 0 0 1px rgba(91, 41, 222, 0.1), 0 0 20px rgba(91, 41, 222, 0.1), 0 0 40px rgba(91, 41, 222, 0.05)",
@@ -869,7 +869,7 @@ const Home = () => {
             <div className="text-center mt-16">
               <Button
                 size="lg"
-                className="bg-calcuu-primary hover:bg-calcuu-primary/90 text-white font-semibold text-lg px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 h-12"
+                className="bg-calcuu-primary hover:bg-calcuu-primary/90 text-white font-semibold text-lg px-8 rounded-lg   transition-all duration-300 hover:scale-105 h-12"
                 onClick={() => {
                   const downloadSection = document.getElementById("download");
                   if (downloadSection) {
@@ -913,7 +913,7 @@ const Home = () => {
 
               {/* Eén gecentreerde kaart */}
               <div className="max-w-xl mx-auto">
-                <div className="bg-white rounded-2xl shadow-xl border-2 border-calcuu-primary p-6 md:p-8 relative">
+                <div className="bg-white rounded-card  border-2 border-calcuu-primary p-6 md:p-8 relative">
                   {/* Founder badge */}
                   <div className="flex justify-center mb-6">
                     <span className="inline-flex items-center gap-2 bg-calcuu-primary text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase">
@@ -924,7 +924,7 @@ const Home = () => {
                   {/* Progress bar + counter */}
                   <div className="mb-6">
                     <div className="flex justify-between items-baseline text-sm mb-2">
-                      <span className="text-calcuu-secondary font-semibold">
+                      <span className="text-calcuu-secondary font-semibold font-mono">
                         {FOUNDER_COUNT} / {FOUNDER_TOTAL} plekken
                       </span>
                       <span className="text-calcuu-text-sub text-xs">
@@ -944,7 +944,7 @@ const Home = () => {
                   {/* Prijs-blok */}
                   <div className="text-center mb-2">
                     <div className="flex items-baseline justify-center gap-1">
-                      <span className="text-6xl font-bold text-calcuu-secondary">
+                      <span className="text-6xl font-bold text-calcuu-secondary font-mono">
                         €{FOUNDER_PRICE}
                       </span>
                       <span className="text-xl text-calcuu-text-sub">
@@ -1048,7 +1048,7 @@ const Home = () => {
               ].map((review, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-all duration-300"
+                  className="bg-white rounded-card p-8   transition-all duration-300"
                 >
                   <div className="flex gap-1 mb-4">
                     {Array.from({ length: review.stars }).map((_, i) => (
@@ -1128,7 +1128,7 @@ const Home = () => {
               <div className="flex justify-center">
                 <button
                   onClick={() => window.open(APP_STORE_URL, "_blank")}
-                  className="flex items-center justify-center gap-3 bg-black text-white px-8 py-5 rounded-xl hover:bg-gray-800 transition-colors w-full max-w-sm cursor-pointer"
+                  className="flex items-center justify-center gap-3 bg-black text-white px-8 py-5 rounded-card hover:bg-gray-800 transition-colors w-full max-w-sm cursor-pointer"
                 >
                   <Download className="w-7 h-7" />
                   <div className="text-left">
@@ -1144,7 +1144,7 @@ const Home = () => {
               <div className="flex justify-center">
                 <button
                   onClick={() => window.open(PLAY_STORE_URL, "_blank")}
-                  className="flex items-center justify-center gap-3 bg-black text-white px-8 py-5 rounded-xl hover:bg-gray-800 transition-colors w-full max-w-sm cursor-pointer"
+                  className="flex items-center justify-center gap-3 bg-black text-white px-8 py-5 rounded-card hover:bg-gray-800 transition-colors w-full max-w-sm cursor-pointer"
                 >
                   <Download className="w-7 h-7" />
                   <div className="text-left">
@@ -1174,7 +1174,7 @@ const Home = () => {
                   />
 
                   <div
-                    className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors cursor-pointer"
+                    className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-card hover:bg-gray-800 transition-colors cursor-pointer"
                     onClick={() => window.open(APP_STORE_URL, "_blank")}
                   >
                     <Download className="w-6 h-6" />
@@ -1184,7 +1184,7 @@ const Home = () => {
                     </div>
                   </div>
                   <div
-                    className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors cursor-pointer"
+                    className="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-card hover:bg-gray-800 transition-colors cursor-pointer"
                     onClick={() => window.open(PLAY_STORE_URL, "_blank")}
                   >
                     <Download className="w-6 h-6" />
@@ -1233,9 +1233,9 @@ const Home = () => {
                 />
                 <span
                   className="text-xl font-bold"
-                  style={{ fontFamily: "Toxigenesis, sans-serif" }}
+                  style={{ fontFamily: "Geist, Inter, sans-serif" }}
                 >
-                  CALCUU
+                  calcuu
                 </span>
               </div>
               <p className="text-gray-300 text-sm">

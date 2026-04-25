@@ -36,13 +36,13 @@ const Calculator = () => {
           {/* Eén gecentreerde donkere kaart */}
           <div
             style={{ backgroundColor: "#242447" }}
-            className="rounded-2xl p-6 md:p-8 text-white shadow-xl"
+            className="rounded-card p-6 md:p-8 text-white "
           >
             {/* Slider */}
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-200 mb-3">
                 Aantal offertes per maand:{" "}
-                <span className="font-bold text-white">
+                <span className="font-bold text-white font-mono">
                   <AnimatedNumber value={offertes} />
                 </span>
               </label>
@@ -72,7 +72,7 @@ const Calculator = () => {
               <div className="text-sm text-gray-300 mb-2">
                 Je bespaart per jaar
               </div>
-              <div className="text-5xl md:text-6xl font-bold text-white mb-3">
+              <div className="text-5xl md:text-6xl font-bold text-white mb-3 font-mono">
                 <AnimatedNumber
                   value={yearlySaving}
                   prefix="€"
@@ -81,12 +81,14 @@ const Calculator = () => {
               </div>
               <div className="text-sm text-gray-300">
                 ={" "}
-                <AnimatedNumber
-                  value={yearlyHours}
-                  decimals={1}
-                  smartDecimals
-                  duration={800}
-                />{" "}
+                <span className="font-mono">
+                  <AnimatedNumber
+                    value={yearlyHours}
+                    decimals={1}
+                    smartDecimals
+                    duration={800}
+                  />
+                </span>{" "}
                 uur extra vrije tijd
               </div>
             </div>

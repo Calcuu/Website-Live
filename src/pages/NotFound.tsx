@@ -74,9 +74,9 @@ const NotFound = () => {
               />
               <span
                 className="text-xl lg:text-2xl font-bold text-calcuu-secondary"
-                style={{ fontFamily: "Toxigenesis, sans-serif" }}
+                style={{ fontFamily: "Geist, Inter, sans-serif" }}
               >
-                CALCUU
+                calcuu
               </span>
             </button>
 
