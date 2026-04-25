@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcuu — Maak binnen 5 min een offerte</title>
+    <meta name="description" content="Calcuu: de calculatie-app voor schilders. Binnen 5 minuten een professionele offerte. Lancering 5 mei 2026.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --deep: #242447;
+            --purple: #5B29DE;
+            --purple-light: #7C3AED;
+            --purple-glow: rgba(91, 41, 222, 0.08);
+            --white: #FFFFFF;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-900: #111827;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--gray-900);
+            background: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .nav-logo svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-logo span {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--deep);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-logo .slogan {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--gray-400);
+            letter-spacing: 0.3px;
+            display: block;
+            line-height: 1;
+            margin-top: -2px;
+        }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 24px;
+            background: var(--deep);
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 100px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            letter-spacing: -0.2px;
+        }
+
+        .nav-cta:hover {
+            background: var(--purple);
+            transform: translateY(-1px);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 24px 80px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(91, 41, 222, 0.04) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .launch-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: var(--purple-glow);
+            border: 1px solid rgba(91, 41, 222, 0.12);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--purple);
+            margin-bottom: 32px;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .launch-badge .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--purple);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 7vw, 80px);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -3px;
+            color: var(--deep);
+            max-width: 800px;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--purple), var(--purple-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: clamp(17px, 2.2vw, 20px);
+            color: var(--gray-500);
+            max-width: 480px;
+            line-height: 1.6;
+            margin-bottom: 48px;
+            font-weight: 400;
+        }
+
+        /* ===== COUNTDOWN ===== */
+        .countdown {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 80px;
+        }
+
+        .countdown-number {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 800;
+            color: var(--deep);
+            letter-spacing: -2px;
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 8px;
+        }
+
+        .countdown-separator {
+            font-size: 36px;
+            font-weight: 300;
+            color: var(--gray-100);
+            line-height: 1;
+            align-self: flex-start;
+        }
+
+        /* ===== EMAIL FORM ===== */
+        .signup-form {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .signup-form input {
+            flex: 1;
+            padding: 16px 20px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            border: 1.5px solid var(--purple);
+            border-radius: 14px;
+            background: var(--white);
+            color: var(--gray-900);
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .signup-form input::placeholder {
+            color: var(--gray-400);
+        }
+
+        .signup-form input:focus {
+            border-color: var(--purple);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(91, 41, 222, 0.08);
+        }
+
+        .signup-form button {
+            padding: 16px 32px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            background: var(--deep);
+            color: var(--white);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            letter-spacing: -0.2px;
+        }
+
+        .signup-form button:hover {
+            background: var(--purple);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(91, 41, 222, 0.25);
+        }
+
+        .signup-note {
+            font-size: 12px;
+            color: var(--gray-400);
+            margin-top: 12px;
+        }
+
+        /* ===== SUCCESS MESSAGE ===== */
+        .signup-success {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .signup-success .checkmark {
+            width: 48px;
+            height: 48px;
+            background: rgba(34, 197, 94, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 4px;
+        }
+
+        .signup-success .checkmark svg {
+            width: 24px;
+            height: 24px;
+            color: #22C55E;
+        }
+
+        .signup-success h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--deep);
+        }
+
+        .signup-success p {
+            font-size: 14px;
+            color: var(--gray-500);
+        }
+
+        /* ===== USP SECTION ===== */
+        .usp-section {
+            padding: 100px 24px;
+            background: var(--gray-50);
+        }
+
+        .usp-section h2 {
+            text-align: center;
+            font-size: clamp(28px, 4vw, 44px);
+            font-weight: 800;
+            color: var(--deep);
+            letter-spacing: -1.5px;
+            margin-bottom: 16px;
+        }
+
+        .usp-subtitle {
+            text-align: center;
+            font-size: 17px;
+            color: var(--gray-500);
+            margin-bottom: 64px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .usp-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .usp-card {
+            padding: 40px 32px;
+            background: var(--white);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+
+        .usp-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        .usp-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--purple-glow);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .usp-icon svg {
+            width: 24px;
+            height: 24px;
+            color: var(--purple);
+        }
+
+        .usp-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--deep);
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .usp-card p {
+            font-size: 15px;
+            color: var(--gray-500);
+            line-height: 1.6;
+        }
+
+        /* ===== HOW IT WORKS ===== */
+        .how-section {
+            padding: 100px 24px;
+        }
+
+        .how-section h2 {
+            text-align: center;
+            font-size: clamp(28px, 4vw, 44px);
+            font-weight: 800;
+            color: var(--deep);
+            letter-spacing: -1.5px;
+            margin-bottom: 64px;
+        }
+
+        .steps {
+            display: flex;
+            gap: 48px;
+            max-width: 900px;
+            margin: 0 auto;
+            align-items: flex-start;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+        }
+
+        .step-number {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--deep);
+            color: var(--white);
+            font-size: 22px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .step h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--deep);
+            margin-bottom: 8px;
+            letter-spacing: -0.2px;
+        }
+
+        .step p {
+            font-size: 14px;
+            color: var(--gray-500);
+            line-height: 1.6;
+        }
+
+        /* ===== FINAL CTA ===== */
+        .cta-section {
+            padding: 100px 24px;
+            text-align: center;
+            background: var(--deep);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(91, 41, 222, 0.3) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(28px, 4vw, 44px);
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: -1.5px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .cta-section .cta-sub {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .cta-section .signup-form {
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .cta-section .signup-form input {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.15);
+            color: var(--white);
+        }
+
+        .cta-section .signup-form input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .cta-section .signup-form input:focus {
+            border-color: var(--purple-light);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.2);
+        }
+
+        .cta-section .signup-form button {
+            background: var(--purple);
+        }
+
+        .cta-section .signup-form button:hover {
+            background: var(--purple-light);
+        }
+
+        .cta-section .signup-note {
+            color: rgba(255, 255, 255, 0.35);
+            position: relative;
+        }
+
+        .cta-section .signup-success h3 {
+            color: var(--white);
+        }
+
+        .cta-section .signup-success p {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 40px 24px;
+            background: var(--deep);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            nav {
+                padding: 16px 20px;
+            }
+
+            .hero {
+                padding: 120px 20px 60px;
+            }
+
+            .hero h1 {
+                letter-spacing: -1.5px;
+            }
+
+            .countdown {
+                gap: 8px;
+            }
+
+            .countdown-item {
+                min-width: 60px;
+            }
+
+            .signup-form {
+                flex-direction: column;
+            }
+
+            .signup-form button {
+                width: 100%;
+            }
+
+            .usp-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .usp-card {
+                padding: 28px 24px;
+            }
+
+            .steps {
+                flex-direction: column;
+                gap: 32px;
+            }
+
+            .cta-section .signup-form {
+                flex-direction: column;
+            }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a href="#" class="nav-logo">
+            <svg viewBox="0 0 263 275" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M218.879 230.392H165.468L218.879 147.789V230.392ZM250.233 64.808L143.747 3.32799C136.061 -1.10935 126.592 -1.10935 118.907 3.32799L12.42 64.8067C4.73467 69.244 0 77.4453 0 86.32V255.644C0 265.875 8.29334 274.169 18.524 274.169H43.776V97.252L131.327 46.704L204.829 89.1413L187.069 116.608L202.181 126.305L197.107 134.215L181.967 124.5L169.172 144.287L184.284 153.983L179.209 161.892L164.069 152.177L151.279 171.96L166.389 181.656L161.315 189.565L146.175 179.852L133.384 199.635L148.495 209.329L143.42 217.24L128.281 207.525L115.491 227.307L130.603 237.003L125.528 244.913L110.388 235.199L85.1893 274.169L244.065 274.167C254.332 274.167 262.653 265.844 262.653 255.579V86.3213C262.653 77.4467 257.919 69.2453 250.233 64.808Z" fill="#7C3AED"/>
+            </svg>
+            <div>
+                <span>Calcuu</span>
+                <span class="slogan">Ready for work, no paperwork.</span>
+            </div>
+        </a>
+        <a href="#signup" class="nav-cta">Houd me op de hoogte</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="launch-badge">
+            <span class="dot"></span>
+            Lancering 5 mei 2026
+        </div>
+
+        <h1>Van calculatie, naar<br><span>offerte</span> in 10 minuten.</h1>
+
+        <p class="hero-sub">De calculatie-app voor vakschilders. Maak visuele calculaties en zet direct om naar een offerte — eenvoudig, overzichtelijk en snel.</p>
+
+        <!-- COUNTDOWN -->
+        <div class="countdown" id="countdown">
+            <div class="countdown-item">
+                <span class="countdown-number" id="days">--</span>
+                <span class="countdown-label">Dagen</span>
+            </div>
+            <span class="countdown-separator">:</span>
+            <div class="countdown-item">
+                <span class="countdown-number" id="hours">--</span>
+                <span class="countdown-label">Uren</span>
+            </div>
+            <span class="countdown-separator">:</span>
+            <div class="countdown-item">
+                <span class="countdown-number" id="minutes">--</span>
+                <span class="countdown-label">Minuten</span>
+            </div>
+            <span class="countdown-separator">:</span>
+            <div class="countdown-item">
+                <span class="countdown-number" id="seconds">--</span>
+                <span class="countdown-label">Seconden</span>
+            </div>
+        </div>
+
+        <!-- SIGNUP FORM -->
+        <div id="signup">
+            <form class="signup-form" id="hero-form" onsubmit="handleMailerLite(event, 'hero')">
+                <input type="email" name="fields[email]" placeholder="jouw@email.nl" required autocomplete="email">
+                <button type="submit">Meld je aan</button>
+            </form>
+            <div class="signup-success" id="hero-success">
+                <div class="checkmark">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                </div>
+                <h3>Je staat op de lijst!</h3>
+                <p>We houden je op de hoogte van de lancering.</p>
+            </div>
+            <p class="signup-note">Geen spam. Alleen lancerings-updates.</p>
+        </div>
+    </section>
+
+    <!-- USP -->
+    <section class="usp-section">
+        <h2 class="fade-in">Waarom Calcuu?</h2>
+        <p class="usp-subtitle fade-in">Gemaakt door een schilder, voor schilders.</p>
+        <div class="usp-grid">
+            <div class="usp-card fade-in">
+                <div class="usp-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+                </div>
+                <h3>Snel</h3>
+                <p>Binnen 5 minuten een complete, professionele offerte. Geen eindeloos gerekenen meer.</p>
+            </div>
+            <div class="usp-card fade-in">
+                <div class="usp-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" /></svg>
+                </div>
+                <h3>Overzichtelijk</h3>
+                <p>Alles op één plek: calculaties, offertes en klantgegevens. Helder en gestructureerd.</p>
+            </div>
+            <div class="usp-card fade-in">
+                <div class="usp-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                </div>
+                <h3>Eenvoudig</h3>
+                <p>Geen technische kennis nodig. Als je een telefoon kunt gebruiken, kun je Calcuu gebruiken.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-section">
+        <h2 class="fade-in">Zo werkt het</h2>
+        <div class="steps">
+            <div class="step fade-in">
+                <div class="step-number">1</div>
+                <h3>Meten & invoeren</h3>
+                <p>Voer de afmetingen en specificaties van het project in via de app.</p>
+            </div>
+            <div class="step fade-in">
+                <div class="step-number">2</div>
+                <h3>Calcuu berekent</h3>
+                <p>De app berekent automatisch materiaal, uren en kosten op basis van jouw gegevens.</p>
+            </div>
+            <div class="step fade-in">
+                <div class="step-number">3</div>
+                <h3>Offerte versturen</h3>
+                <p>Verstuur een professionele offerte direct vanuit de app naar je klant.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="cta-section">
+        <h2 class="fade-in">Wees er als eerste bij.</h2>
+        <p class="cta-sub fade-in">Meld je aan en krijg exclusief vroege toegang op 5 mei.</p>
+        <form class="signup-form fade-in" id="cta-form" onsubmit="handleMailerLite(event, 'cta')">
+            <input type="email" name="fields[email]" placeholder="jouw@email.nl" required autocomplete="email">
+            <button type="submit">Meld je aan</button>
+        </form>
+        <div class="signup-success" id="cta-success">
+            <div class="checkmark">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+            </div>
+            <h3>Je staat op de lijst!</h3>
+            <p>We houden je op de hoogte van de lancering.</p>
+        </div>
+        <p class="signup-note fade-in">Geen spam. Alleen lancerings-updates.</p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Calcuu. Alle rechten voorbehouden.</p>
+    </footer>
+
+    <script>
+        // ===== COUNTDOWN =====
+        function updateCountdown() {
+            const launch = new Date('2026-05-05T00:00:00').getTime();
+            const now = new Date().getTime();
+            const diff = launch - now;
+
+            if (diff <= 0) {
+                document.getElementById('days').textContent = '0';
+                document.getElementById('hours').textContent = '0';
+                document.getElementById('minutes').textContent = '0';
+                document.getElementById('seconds').textContent = '0';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // ===== SCROLL ANIMATIONS =====
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // ===== MAILERLITE FORM HANDLING =====
+        function handleMailerLite(event, formId) {
+            event.preventDefault();
+            var form = document.getElementById(formId + '-form');
+            var success = document.getElementById(formId + '-success');
+            var email = form.querySelector('input[type="email"]').value;
+
+            // Toon succesmelding direct
+            form.style.display = 'none';
+            success.style.display = 'flex';
+
+            // Verberg "geen spam" tekst
+            var notes = form.parentElement.querySelectorAll('.signup-note');
+            for (var i = 0; i < notes.length; i++) {
+                notes[i].style.display = 'none';
+            }
+
+            // Verstuur naar MailerLite op de achtergrond
+            try {
+                var formData = new FormData();
+                formData.append('fields[email]', email);
+                formData.append('ml-submit', '1');
+                formData.append('anticsrf', 'true');
+                fetch('https://assets.mailerlite.com/jsonp/1131892/forms/184207250507695174/subscribe', {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                });
+            } catch(e) {}
+        }
+    </script>
+    <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v95037e5bac78f29ed026832ca21a7c7b" type="text/javascript"></script>
+
+</body>
+</html>
