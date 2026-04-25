@@ -903,7 +903,7 @@ const Home = () => {
               {/* Header */}
               <div className="text-center mb-12">
                 <h2 className="text-4xl md:text-5xl font-bold text-calcuu-secondary mb-4">
-                  Word Founder Member.
+                  Tijdelijke Superactie.
                 </h2>
                 <p className="text-lg text-calcuu-text-sub max-w-2xl mx-auto">
                   Voor de eerste {FOUNDER_TOTAL} schilders die meebouwen aan
@@ -996,7 +996,7 @@ const Home = () => {
                       }
                     }}
                   >
-                    Word Founder Member
+                    Tijdelijke Superactie
                   </Button>
                 </div>
 
