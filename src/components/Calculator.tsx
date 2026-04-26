@@ -42,7 +42,7 @@ const Calculator = () => {
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-200 mb-3">
                 Aantal offertes per maand:{" "}
-                <span className="font-bold text-white font-mono">
+                <span className="font-bold text-white font-mono tabular-nums">
                   <AnimatedNumber value={offertes} />
                 </span>
               </label>
@@ -72,7 +72,7 @@ const Calculator = () => {
               <div className="text-sm text-gray-300 mb-2">
                 Je bespaart per jaar
               </div>
-              <div className="text-5xl md:text-6xl font-bold text-white mb-3 font-mono">
+              <div className="text-5xl md:text-6xl font-bold text-white mb-3 font-mono tabular-nums">
                 <AnimatedNumber
                   value={yearlySaving}
                   prefix="€"
@@ -81,7 +81,7 @@ const Calculator = () => {
               </div>
               <div className="text-sm text-gray-300">
                 ={" "}
-                <span className="font-mono">
+                <span className="font-mono tabular-nums">
                   <AnimatedNumber
                     value={yearlyHours}
                     decimals={1}

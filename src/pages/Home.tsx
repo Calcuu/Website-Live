@@ -924,7 +924,7 @@ const Home = () => {
                   {/* Progress bar + counter */}
                   <div className="mb-6">
                     <div className="flex justify-between items-baseline text-sm mb-2">
-                      <span className="text-calcuu-secondary font-semibold font-mono">
+                      <span className="text-calcuu-secondary font-semibold font-mono tabular-nums">
                         {FOUNDER_COUNT} / {FOUNDER_TOTAL} plekken
                       </span>
                       <span className="text-calcuu-text-sub text-xs">
@@ -944,7 +944,7 @@ const Home = () => {
                   {/* Prijs-blok */}
                   <div className="text-center mb-2">
                     <div className="flex items-baseline justify-center gap-1">
-                      <span className="text-6xl font-bold text-calcuu-secondary font-mono">
+                      <span className="text-6xl font-bold text-calcuu-secondary font-mono tabular-nums">
                         €{FOUNDER_PRICE}
                       </span>
                       <span className="text-xl text-calcuu-text-sub">
