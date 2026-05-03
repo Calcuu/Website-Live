@@ -25,7 +25,7 @@ const ComingSoon = () => {
   });
 
   // Target date: September 1, 2025
-  const targetDate = new Date("2025-09-01T00:00:00").getTime();
+  const targetDate = new Date("2026-05-22T00:00:00").getTime();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -83,7 +83,7 @@ const ComingSoon = () => {
           {/* Countdown Timer */}
           <div className="bg-white rounded-card p-6  border border-calcuu-detail">
             <h3 className="text-lg font-semibold text-calcuu-secondary mb-4 text-center">
-              Lancering 1 september:
+              Lancering vrijdag 22 mei:
             </h3>
             <div className="grid grid-cols-4 gap-4">
               {[
