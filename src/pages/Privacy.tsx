@@ -75,9 +75,9 @@ const Privacy = () => {
               />
               <span
                 className="text-xl lg:text-2xl font-bold text-calcuu-secondary"
-                style={{ fontFamily: "Toxigenesis, sans-serif" }}
+                style={{ fontFamily: "Geist, Inter, sans-serif" }}
               >
-                CALCUU
+                calcuu
               </span>
             </button>
 
@@ -100,7 +100,7 @@ const Privacy = () => {
           {/* Header */}
           <div className="mb-16">
             {/* Two-Column Header Layout */}
-            <div className="bg-gradient-to-br from-calcuu-white to-calcuu-background border border-calcuu-detail rounded-2xl p-8 lg:p-12 shadow-lg max-w-5xl mx-auto">
+            <div className="bg-gradient-to-br from-calcuu-white to-calcuu-background border border-calcuu-detail rounded-card p-8 lg:p-12 shadow-lg max-w-5xl mx-auto">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-center">
                 {/* Left Column - Logo & Company Info (1/3) */}
                 <div className="text-center lg:text-left lg:col-span-1">
@@ -116,9 +116,9 @@ const Privacy = () => {
 
                   <h1
                     className="text-2xl lg:text-3xl font-bold text-calcuu-secondary mb-3"
-                    style={{ fontFamily: "Toxigenesis, sans-serif" }}
+                    style={{ fontFamily: "Geist, Inter, sans-serif" }}
                   >
-                    CALCUU
+                    calcuu
                   </h1>
 
                   <div className="inline-flex items-center gap-2 bg-white rounded-full px-3 py-1.5 shadow-sm border border-calcuu-detail mb-4">

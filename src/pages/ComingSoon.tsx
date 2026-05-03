@@ -25,7 +25,7 @@ const ComingSoon = () => {
   });
 
   // Target date: September 1, 2025
-  const targetDate = new Date("2025-09-01T00:00:00").getTime();
+  const targetDate = new Date("2026-05-22T00:00:00").getTime();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -81,9 +81,9 @@ const ComingSoon = () => {
           </div>
 
           {/* Countdown Timer */}
-          <div className="bg-white rounded-2xl p-6 shadow-lg border border-calcuu-detail">
+          <div className="bg-white rounded-card p-6  border border-calcuu-detail">
             <h3 className="text-lg font-semibold text-calcuu-secondary mb-4 text-center">
-              Lancering 1 september:
+              Lancering vrijdag 22 mei:
             </h3>
             <div className="grid grid-cols-4 gap-4">
               {[
@@ -107,7 +107,7 @@ const ComingSoon = () => {
           </div>
 
           {/* Email Signup */}
-          <div className="bg-white rounded-2xl p-6 shadow-lg border border-calcuu-detail">
+          <div className="bg-white rounded-card p-6  border border-calcuu-detail">
             {/* Signup Introduction Text */}
             <div className="text-center lg:text-left space-y-4 mb-6">
               <p className="text-lg font-semibold text-calcuu-secondary">
@@ -184,7 +184,7 @@ const ComingSoon = () => {
               <img
                 src={randomImage}
                 alt="Calcuu App Preview met Vakschilder"
-                className="w-full max-w-lg mx-auto drop-shadow-2xl"
+                className="w-full max-w-lg mx-auto "
               />
             </div>
           </div>
