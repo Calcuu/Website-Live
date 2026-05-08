@@ -268,16 +268,15 @@ const Home = () => {
             <div className="lg:col-span-3">
               <div className="space-y-6">
                 <p className="text-lg md:text-xl font-bold text-calcuu-primary mb-4">
-                  Vakschilders, opgelet!
+                  Slimme calculatie-app
                 </p>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-calcuu-secondary leading-[1.1] tracking-tight">
-                  Stop met het maken van&nbsp;
-                  <span className="text-calcuu-primary">offertes</span> in de
-                  avonduren
+                  Stop met &rsquo;s avonds&nbsp;
+                  <span className="text-calcuu-primary">offertes</span> maken.
                 </h1>
                 <p className="text-lg md:text-xl text-calcuu-text-sub leading-relaxed max-w-2xl">
-                  Calcuu is de slimme calculatie-app voor vakschilders. <br />
-                  Geen papierwerk. Geen rekenwerk. Alleen nog maar schilderwerk
+                  Het digitale gereedschap van de schilder. <br />
+                  Calculaties, offertes en urenregistratie — direct op locatie.
                 </p>
               </div>
 
@@ -301,7 +300,7 @@ const Home = () => {
                   className="border-2 border-calcuu-primary text-calcuu-primary hover:bg-calcuu-primary hover:text-white font-semibold text-lg px-8 rounded-lg transition-all duration-300 hover:scale-105 h-12"
                   onClick={scrollToVideoAndPlay}
                 >
-                  Bekijk demo video
+                  Bekijk demo
                 </Button>
               </div>
             </div>
