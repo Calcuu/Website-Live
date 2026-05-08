@@ -271,11 +271,12 @@ const Home = () => {
                   Slimme calculatie-app
                 </p>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-calcuu-secondary leading-[1.1] tracking-tight">
-                  Stop met &rsquo;s avonds&nbsp;
+                  Stop met &rsquo;s avonds
+                  <br />
                   <span className="text-calcuu-primary">offertes</span> maken.
                 </h1>
                 <p className="text-lg md:text-xl text-calcuu-text-sub leading-relaxed max-w-2xl">
-                  Het digitale gereedschap van de schilder. <br />
+                  Calcuu is het digitale gereedschap van de schilder. <br />
                   Calculaties, offertes en urenregistratie — direct op locatie.
                 </p>
               </div>
