@@ -276,8 +276,8 @@ const Home = () => {
                   <span className="text-calcuu-primary">offertes</span> maken.
                 </h1>
                 <p className="text-lg md:text-xl text-calcuu-text-sub leading-relaxed max-w-2xl">
-                  Houd tijd over. Calcuu regelt de calculatie, offertes en
-                  urenregistratie direct op locatie.
+                  Houd tijd over met Calcuu. Calculatie, offertes en
+                  urenregistratie direct op locatie geregeld.
                 </p>
               </div>
 
