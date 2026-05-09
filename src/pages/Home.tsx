@@ -937,7 +937,7 @@ const Home = () => {
                       "Volledige toegang tot alle functies",
                       "Direct calculeren en offreren op locatie",
                       "Urenregistratie en projectoverzicht",
-                      "Direct contact met de oprichter",
+                      "Foto's en documentatie per project",
                     ].map((feature, index) => (
                       <div key={index} className="flex items-start gap-3">
                         <CheckCircle className="w-5 h-5 text-calcuu-primary flex-shrink-0 mt-0.5" />
