@@ -268,7 +268,7 @@ const Home = () => {
             <div className="lg:col-span-3">
               <div className="space-y-6">
                 <p className="text-lg md:text-xl font-bold text-calcuu-primary mb-4">
-                  Slimme calculatie-app
+                  Vakschilders, opgelet!
                 </p>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-calcuu-secondary leading-[1.1] tracking-tight">
                   Stop met &rsquo;s avonds
@@ -276,8 +276,8 @@ const Home = () => {
                   <span className="text-calcuu-primary">offertes</span> maken.
                 </h1>
                 <p className="text-lg md:text-xl text-calcuu-text-sub leading-relaxed max-w-2xl">
-                  Calcuu is het digitale gereedschap van de schilder. <br />
-                  Calculaties, offertes en urenregistratie — direct op locatie.
+                  Houd tijd over. Calcuu regelt de calculatie, offertes en
+                  urenregistratie direct op locatie.
                 </p>
               </div>
 
