@@ -271,13 +271,13 @@ const Home = () => {
                   Vakschilders, opgelet!
                 </p>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-calcuu-secondary leading-[1.1] tracking-tight">
-                  Stop met het maken van&nbsp;
-                  <span className="text-calcuu-primary">offertes</span> in de
-                  avonduren
+                  Stop met &rsquo;s avonds
+                  <br />
+                  <span className="text-calcuu-primary">offertes</span> maken.
                 </h1>
                 <p className="text-lg md:text-xl text-calcuu-text-sub leading-relaxed max-w-2xl">
-                  Calcuu is de slimme calculatie-app voor vakschilders. <br />
-                  Geen papierwerk. Geen rekenwerk. Alleen nog maar schilderwerk
+                  Houd tijd over met Calcuu. Calculatie, offertes en
+                  urenregistratie direct op locatie geregeld.
                 </p>
               </div>
 
@@ -301,7 +301,7 @@ const Home = () => {
                   className="border-2 border-calcuu-primary text-calcuu-primary hover:bg-calcuu-primary hover:text-white font-semibold text-lg px-8 rounded-lg transition-all duration-300 hover:scale-105 h-12"
                   onClick={scrollToVideoAndPlay}
                 >
-                  Bekijk demo video
+                  Bekijk demo
                 </Button>
               </div>
             </div>
@@ -885,17 +885,10 @@ const Home = () => {
       </section>
       <Calculator />
 
-      {/* Pricing Section — Founder Member offer */}
+      {/* Pricing Section — Launch promo */}
       {(() => {
-        const FOUNDER_COUNT = 4;
-        const FOUNDER_TOTAL = 75;
-        const FOUNDER_PRICE = 15;
-        const FOUNDER_YEARLY = FOUNDER_PRICE * 12;
-        const REGULAR_PRICE = 47;
-        const remaining = FOUNDER_TOTAL - FOUNDER_COUNT;
-        const progressPercent = Math.round(
-          (FOUNDER_COUNT / FOUNDER_TOTAL) * 100,
-        );
+        const LAUNCH_PRICE = 15;
+        const LAUNCH_YEARLY = LAUNCH_PRICE * 12;
 
         return (
           <section id="pricing" className="py-16 lg:py-24 bg-gray-50">
@@ -903,64 +896,36 @@ const Home = () => {
               {/* Header */}
               <div className="text-center mb-12">
                 <h2 className="text-4xl md:text-5xl font-bold text-calcuu-secondary mb-4">
-                  Super Actie!
+                  Tijdelijke lanceringsactie
                 </h2>
                 <p className="text-lg text-calcuu-text-sub max-w-2xl mx-auto">
-                  Voor de eerste {FOUNDER_TOTAL} schilders die meebouwen aan
-                  Calcuu.
+                  Start nu voordelig met Calcuu en bespaar het eerste jaar op
+                  je abonnement.
                 </p>
               </div>
 
               {/* Eén gecentreerde kaart */}
               <div className="max-w-xl mx-auto">
                 <div className="bg-white rounded-card  border-2 border-calcuu-primary p-6 md:p-8 relative">
-                  {/* Founder badge */}
-                  <div className="flex justify-center mb-6">
-                    <span className="inline-flex items-center gap-2 bg-calcuu-primary text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase">
-                      🔨 Founder Member
-                    </span>
-                  </div>
-
-                  {/* Progress bar + counter */}
-                  <div className="mb-6">
-                    <div className="flex justify-between items-baseline text-sm mb-2">
-                      <span className="text-calcuu-secondary font-semibold font-mono tabular-nums">
-                        {FOUNDER_COUNT} / {FOUNDER_TOTAL} plekken
-                      </span>
-                      <span className="text-calcuu-text-sub text-xs">
-                        Nog {remaining} beschikbaar
-                      </span>
-                    </div>
-                    <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-calcuu-primary transition-all duration-500"
-                        style={{ width: `${progressPercent}%` }}
-                      />
-                    </div>
-                  </div>
-
-                  <hr className="border-gray-200 my-6" />
-
                   {/* Prijs-blok */}
                   <div className="text-center mb-2">
                     <div className="flex items-baseline justify-center gap-1">
                       <span className="text-6xl font-bold text-calcuu-secondary font-mono tabular-nums">
-                        €{FOUNDER_PRICE}
+                        €{LAUNCH_PRICE}
                       </span>
                       <span className="text-xl text-calcuu-text-sub">
                         / maand
                       </span>
                     </div>
                     <p className="text-sm text-calcuu-text-sub mt-2">
-                      Jaarlijks gefactureerd · €{FOUNDER_YEARLY} per jaar
+                      Jaarlijks gefactureerd • €{LAUNCH_YEARLY} per jaar
                     </p>
                   </div>
 
-                  {/* Price-lock-uitleg */}
+                  {/* Kleine tekst */}
                   <p className="text-center text-sm text-calcuu-text-sub mt-6 px-4 leading-relaxed">
-                    Jouw prijs blijft <strong>€{FOUNDER_PRICE}/maand</strong>{" "}
-                    zolang je gebruiker bent — ook als Calcuu later €
-                    {REGULAR_PRICE}/maand kost.
+                    Na het eerste jaar wordt automatisch het standaardtarief
+                    toegepast.
                   </p>
 
                   <hr className="border-gray-200 my-6" />
@@ -970,10 +935,9 @@ const Home = () => {
                     {[
                       "14 dagen gratis proberen",
                       "Volledige toegang tot alle functies",
-                      `"Founder Member" status in de app`,
-                      "Direct contact met de oprichter",
-                      "Stem in welke features als eerste komen",
-                      `Lifetime price-lock op €${FOUNDER_PRICE}/maand`,
+                      "Direct calculeren en offreren op locatie",
+                      "Urenregistratie en projectoverzicht",
+                      "Foto's en documentatie per project",
                     ].map((feature, index) => (
                       <div key={index} className="flex items-start gap-3">
                         <CheckCircle className="w-5 h-5 text-calcuu-primary flex-shrink-0 mt-0.5" />
@@ -996,16 +960,9 @@ const Home = () => {
                       }
                     }}
                   >
-                    Super Actie!
+                    Start 14 dagen gratis
                   </Button>
                 </div>
-
-                {/* Voetnoot */}
-                <p className="text-xs text-gray-500 text-center mt-4 px-4 leading-relaxed">
-                  Na de eerste {FOUNDER_TOTAL} deelnemers geldt de reguliere
-                  prijs van €{REGULAR_PRICE}/maand. Aanbieding alleen voor
-                  nieuwe gebruikers.
-                </p>
               </div>
             </div>
           </section>
