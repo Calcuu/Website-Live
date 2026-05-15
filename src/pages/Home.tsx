@@ -276,8 +276,9 @@ const Home = () => {
                   <span className="text-calcuu-primary">offertes</span> maken.
                 </h1>
                 <p className="text-lg md:text-xl text-calcuu-text-sub leading-relaxed max-w-2xl">
-                  Houd tijd over met Calcuu. Calculatie, offertes en
-                  urenregistratie direct op locatie geregeld.
+                  Maak calculaties, offertes en urenregistratie op locatie.
+                  <br className="hidden md:block" />
+                  Je bent klaar voordat je de bus in stapt.
                 </p>
               </div>
 
@@ -604,7 +605,7 @@ const Home = () => {
             ].map((audience, index) => (
               <div
                 key={index}
-                className={`text-center p-6 bg-calcuu-primary/5 overflow-hidden ${audience.isMiddle ? "flex flex-col" : ""}`}
+                className={`text-center p-6 bg-calcuu-primary/5 rounded-lg overflow-hidden ${audience.isMiddle ? "flex flex-col" : ""}`}
               >
                 <h3 className="text-xl font-semibold text-calcuu-secondary mb-4">
                   {audience.question}
