@@ -325,9 +325,19 @@ const Privacy = () => {
               <h3 className="text-xl font-semibold text-calcuu-secondary mb-3">
                 5.2 Netwerkcommunicatie
               </h3>
-              <p className="text-calcuu-text-sub leading-relaxed">
+              <p className="text-calcuu-text-sub leading-relaxed mb-6">
                 Voor het functioneren van de app is internettoegang vereist om
                 gegevens te verzenden en synchroniseren met onze servers.
+              </p>
+
+              <h3 className="text-xl font-semibold text-calcuu-secondary mb-3">
+                5.3 Locatie
+              </h3>
+              <p className="text-calcuu-text-sub leading-relaxed">
+                Toestemming is nodig om automatisch het adres in te vullen bij
+                het aanmaken van een project. Locatie wordt alleen gebruikt op
+                het moment dat je op de locatieknop tikt in het aanmaakscherm.
+                Locatie wordt nooit op de achtergrond verzameld of opgeslagen.
               </p>
             </section>
 
@@ -353,6 +363,7 @@ const Privacy = () => {
                     <li>• Apparaat informatie (voor ondersteuning)</li>
                     <li>• App-gebruik statistieken (anoniem)</li>
                     <li>• Bluetooth gegevens (Leica koppeling)</li>
+                    <li>• Locatiegegevens (alleen op verzoek, voor automatisch invullen van projectadres)</li>
                   </ul>
                 </div>
 
@@ -361,7 +372,6 @@ const Privacy = () => {
                     ❌ Data die we NIET verzamelen
                   </h3>
                   <ul className="space-y-2 text-red-600">
-                    <li>• Locatiegegevens</li>
                     <li>• Contactenlijst</li>
                     <li>• Camera/foto's</li>
                     <li>• Microfoon/audio</li>
